@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS CLIENT
    DATE_DE_NAISSANCE DATE NULL  ,
    TEL INTEGER NULL  ,
    DATE_INSCRIPTION DATE NULL  ,
+   MOT_DE_PASSE CHAR(50) NULL ,
    MODE_FACTURATION CHAR(30) NULL  
    , PRIMARY KEY (N_CLIENT) 
  ) 
@@ -119,10 +120,10 @@ CREATE TABLE IF NOT EXISTS MONITEUR
  comment = "";
 
 # -----------------------------------------------------------------------------
-#       TABLE : LEÇON
+#       TABLE : LECON
 # -----------------------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS LEÇON
+CREATE TABLE IF NOT EXISTS LECON
  (
    N_LECON INTEGER NOT NULL  ,
    DATE_LECON DATE NULL  ,
@@ -220,7 +221,7 @@ CREATE TABLE IF NOT EXISTS ULTILISER
 # -----------------------------------------------------------------------------
 
 
-CREATE  INDEX I_FK_ULTILISER_LEÇON
+CREATE  INDEX I_FK_ULTILISER_LECON
      ON ULTILISER (N_LECON ASC);
 
 CREATE  INDEX I_FK_ULTILISER_VEHICULE
@@ -247,7 +248,7 @@ CREATE TABLE IF NOT EXISTS PLANNING
 # -----------------------------------------------------------------------------
 
 
-CREATE  INDEX I_FK_PLANNING_LEÇON
+CREATE  INDEX I_FK_PLANNING_LECON
      ON PLANNING (N_LECON ASC);
 
 CREATE  INDEX I_FK_PLANNING_CLIENT
@@ -286,24 +287,24 @@ CREATE  INDEX I_FK_EXAM_CODE_CLIENT
      ON EXAM_CODE (N_CLIENT ASC);
 
 # -----------------------------------------------------------------------------
-#       TABLE : H_N_LECON_LEÇON
+#       TABLE : H_N_LECON_LECON
 # -----------------------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS H_N_LECON_LEÇON
+CREATE TABLE IF NOT EXISTS H_N_LECON_LECON
  (
    N_LECON INTEGER NOT NULL  ,
    DATE_HISTO DATE NOT NULL  
    , PRIMARY KEY (N_LECON,DATE_HISTO) 
  ) 
- comment = "Table d'historisation des modifications de la table LEÇON";
+ comment = "Table d'historisation des modifications de la table LECON";
 
 # -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE H_N_LECON_LEÇON
+#       INDEX DE LA TABLE H_N_LECON_LECON
 # -----------------------------------------------------------------------------
 
 
-CREATE  INDEX I_FK_H_N_LECON_LEÇON_LEÇON
-     ON H_N_LECON_LEÇON (N_LECON ASC);
+CREATE  INDEX I_FK_H_N_LECON_LECON_LECON
+     ON H_N_LECON_LECON (N_LECON ASC);
 
 
 # -----------------------------------------------------------------------------
@@ -347,8 +348,8 @@ ALTER TABLE EXAM_PERMIS
 
 
 ALTER TABLE ULTILISER 
-  ADD FOREIGN KEY FK_ULTILISER_LEÇON (N_LECON)
-      REFERENCES LEÇON (N_LECON) ;
+  ADD FOREIGN KEY FK_ULTILISER_LECON (N_LECON)
+      REFERENCES LECON (N_LECON) ;
 
 
 ALTER TABLE ULTILISER 
@@ -357,8 +358,8 @@ ALTER TABLE ULTILISER
 
 
 ALTER TABLE PLANNING 
-  ADD FOREIGN KEY FK_PLANNING_LEÇON (N_LECON)
-      REFERENCES LEÇON (N_LECON) ;
+  ADD FOREIGN KEY FK_PLANNING_LECON (N_LECON)
+      REFERENCES LECON (N_LECON) ;
 
 
 ALTER TABLE PLANNING 
@@ -386,7 +387,7 @@ ALTER TABLE EXAM_CODE
       REFERENCES CLIENT (N_CLIENT) ;
 
 
-ALTER TABLE H_N_LECON_LEÇON 
-  ADD FOREIGN KEY FK_H_N_LECON_LEÇON_LEÇON (N_LECON)
-      REFERENCES LEÇON (N_LECON) ;
+ALTER TABLE H_N_LECON_LECON 
+  ADD FOREIGN KEY FK_H_N_LECON_LECON_LECON (N_LECON)
+      REFERENCES LECON (N_LECON) ;
 
