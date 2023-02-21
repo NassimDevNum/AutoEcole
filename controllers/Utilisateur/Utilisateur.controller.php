@@ -1,17 +1,22 @@
 <?php
 require_once("./controllers/MainController.controller.php");
-require_once("./models/Visiteur/Visiteur.model.php");
+require_once("./models/Utilisateur/Utilisateur.model.php");
 
 
 class UtilisateurController extends MainController{
-    // private $visiteurManager;
+     private $utilisateurManager;
 
-    // public function __construct(){
-    //     $this->visiteurManager = new VisiteurManager();
-    // }
+    public function __construct(){
+    $this->utilisateurManager = new UtilisateurManager();
+    }
 
   public function validation_login($NOM_CLIENT,$MDP){
-    echo "test";
+    if($this->utilisateurManager->isCombinaisonValide($NOM_CLIENT,$MDP)){
+
+    }else {
+        Toolbox::ajouterMessageAlerte("Combinaison login et mdp non valide", Toolbox::COULEUR_ROUGE);
+        header("Location: ".URL."login");
+    }
   }
 
     public function pageErreur($msg){

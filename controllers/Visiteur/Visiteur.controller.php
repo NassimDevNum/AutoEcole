@@ -24,6 +24,7 @@ class VisiteurController extends MainController{
     }
 
     public function login(){
+        //echo password_hash("test", PASSWORD_DEFAULT);
         $data_page = [
             "page_description" => "Page de connexion",
             "page_title" => "Page de connexion",    // info trans vers la vu grace à cette ligne 
