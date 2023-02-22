@@ -35,7 +35,7 @@ try {
             Toolbox::ajouterMessageAlerte("Login ou mdp non renseigné",Toolbox::COULEUR_ROUGE );
             header('Location: '.URL.'login');
         }
-       // echo $_POST['NOM_CLIENT'] . " - " .$_POST['MDP']; 
+      // echo $_POST['NOM_CLIENT'] . " - " .$_POST['MDP']; 
         break;
         case "compte" : 
             switch($url[1]){

@@ -12,7 +12,7 @@ class UtilisateurController extends MainController{
 
   public function validation_login($NOM_CLIENT,$MDP){
     if($this->utilisateurManager->isCombinaisonValide($NOM_CLIENT,$MDP)){
-
+        echo "C'est bon";
     }else {
         Toolbox::ajouterMessageAlerte("Combinaison login et mdp non valide", Toolbox::COULEUR_ROUGE);
         header("Location: ".URL."login");
