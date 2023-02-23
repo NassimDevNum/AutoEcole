@@ -8,12 +8,10 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="<?= URL; ?>accueil">Accueil</a>
         </li>
-       
         <?php if(empty($_SESSION['profil'])) : ?>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="<?= URL; ?>login">Se connecter</a>
         </li>
-        
         <?php else : ?>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="<?= URL; ?>compte/profil">Profil</a>
@@ -22,7 +20,6 @@
           <a class="nav-link" aria-current="page" href="<?= URL; ?>compte/deconnexion">Se déconnecter</a>
         </li>
         <?php endif ; ?>
-        
         <li class="nav-item">
           <a class="nav-link" href="<?= URL; ?>page1">page1</a>
         </li>

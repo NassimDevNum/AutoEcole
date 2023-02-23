@@ -38,13 +38,18 @@ try {
       // echo $_POST['NOM_CLIENT'] . " - " .$_POST['MDP']; 
         break;
         case "compte" : 
+           if (!Securite::estConnecte()){  //le if suivant vérifie si on est bien co ou pas 
+            Toolbox::ajouterMessageAlerte('Veuiller vous connecter !', Toolbox::COULEUR_ROUGE);
+            header('Location: '.URL.'login');
+        } else{
             switch($url[1]){
                 case "profil": $utilisateurController->profil();
                 break;
-                case "deconnexion" : $utilisateurController->deconnexion();
+              case "deconnexion" : $utilisateurController->deconnexion();
                 break;
                 default : throw new Exception("La page n'existe pas"); //sans le default ça nous affiche une page blanche 
             }
+        }
         break;
         default : throw new Exception("La page n'existe pas");
     }

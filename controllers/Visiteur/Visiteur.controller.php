@@ -2,7 +2,6 @@
 require_once("./controllers/MainController.controller.php");
 require_once("./models/Visiteur/Visiteur.model.php");
 
-
 class VisiteurController extends MainController{
     private $visiteurManager;
 

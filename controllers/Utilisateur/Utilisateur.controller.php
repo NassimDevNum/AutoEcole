@@ -12,20 +12,24 @@ class UtilisateurController extends MainController{
 
   public function validation_login($NOM_CLIENT,$MDP){
     if($this->utilisateurManager->isCombinaisonValide($NOM_CLIENT,$MDP)){
-      Toolbox::ajouterMessageAlerte("Bienvenue sur le site".$NOM_CLIENT. "!", Toolbox::COULEUR_VERTE);  
-      //echo "C'est bon";
+      //if($this->utilisateurManager->estCompteActive($login)){
+      Toolbox::ajouterMessageAlerte("Bienvenue sur le site".$NOM_CLIENT." !", Toolbox::COULEUR_VERTE);  
+     // echo "C'est bon";
       $_SESSION['profil'] = [
         "NOM_CLIENT" => $NOM_CLIENT,
       ];
-      header("location: ".URL."compte/profil");
+      header("Location: ".URL."compte/profil");
     }else {
         Toolbox::ajouterMessageAlerte("Combinaison login et mdp non valide", Toolbox::COULEUR_ROUGE);
         header("Location: ".URL."login");
     }
-  }
+  }  
+  //}
   public function profil (){
     $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['NOM_CLIENT']);
-    // $_SESSION['profil']['role'] = $datas['role']; // à voir apres
+    //$_SESSION['profil']['role'] = $datas['role']; // à voir apres
+
+    //$_SESSION['profil']
 
     $data_page = [
       "page_description" => "Page de profil",
