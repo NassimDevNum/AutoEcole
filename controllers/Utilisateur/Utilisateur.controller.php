@@ -37,6 +37,12 @@ class UtilisateurController extends MainController{
   $this->genererPage($data_page);
   }
 
+  public function deconnexion(){
+    Toolbox::ajouterMessageAlerte("Dexonnexion efectuée",Toolbox::COULEUR_VERTE);
+    unset($_SESSION['profil']);
+    header("Location: ".URL."accueil");
+  }
+
   public function pageErreur($msg){
      parent::pageErreur($msg);
   }
