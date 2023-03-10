@@ -35,7 +35,19 @@ try {
             Toolbox::ajouterMessageAlerte("Login ou mdp non renseigné",Toolbox::COULEUR_ROUGE );
             header('Location: '.URL.'login');
         }
-      // echo $_POST['NOM_CLIENT'] . " - " .$_POST['MDP']; 
+        break;
+        case "creerCompte" : $visiteurController->creerCompte();
+        break;
+        case "validation_creerCompte" :
+            if(!empty($_POST['NOM_CLIENT']) && !empty($_POST['MDP']) && !empty($_POST['MAIL'])){
+                $NOM_CLIENT = Securite::secureHTML($_POST['NOM_CLIENT']);
+                $MDP = Securite::secureHTML($_POST['MDP']);
+                $MAIL = Securite::secureHTML($_POST['MAIL']);
+                $utilisateurController->validation_creerCompte($NOM_CLIENT,$MDP,$MAIL);
+            }else {
+                Toolbox::ajouterMessageAlerte("les 3 information sont obligatoires !", Toolbox::COULEUR_ROUGE);
+                header('Location: '.URL.'creerCompte');
+            }
         break;
         case "compte" : 
            if (!Securite::estConnecte()){  //le if suivant vérifie si on est bien co ou pas 

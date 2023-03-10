@@ -47,6 +47,23 @@ class UtilisateurController extends MainController{
     header("Location: ".URL."accueil");
   }
 
+  public function validation_creerCompte($NOM_CLIENT,$MDP,$MAIL){
+    if($this->utilisateurManager->verifLoginDisponible($NOM_CLIENT)){
+      $passwordCrypt= password_hash($MDP, PASSWORD_DEFAULT);
+      // $clef = rand(0,9999); // a voir apres 
+      if($this->utilisateurManager->bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL)){
+
+      }else{
+        Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencer !",Toolbox::COULEUR_ROUGE);
+        header("Location: ".URL."creeCompte");
+      }
+    }else {
+      Toolbox::ajouterMessageAlerte("Le login est déjà utilisé ! ", Toolbox::COULEUR_ROUGE);
+      header("Location: ".URL."creerCompte");
+    }
+  }
+
+
   public function pageErreur($msg){
      parent::pageErreur($msg);
   }
