@@ -52,7 +52,9 @@ class UtilisateurController extends MainController{
       $passwordCrypt= password_hash($MDP, PASSWORD_DEFAULT);
       // $clef = rand(0,9999); // a voir apres 
       if($this->utilisateurManager->bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL)){
-
+        $this->sendMailValidation($NOM_CLIENT, $MAIL);
+        Toolbox::ajouterMessageAlerte("Le compte a  été créer ! ",Toolbox::COULEUR_VERTE);
+        header("Location: ".URL."login");
       }else{
         Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencer !",Toolbox::COULEUR_ROUGE);
         header("Location: ".URL."creeCompte");
@@ -63,6 +65,12 @@ class UtilisateurController extends MainController{
     }
   }
 
+  private  function sendMailValidation( $NOM_CLIENT, $MAIL){
+    $urlVerification = URL."validationMail/".$NOM_CLIENT."/";
+    $sujet = "Création du compte sur le site < ... > ";
+    $message = "Pour valider votre compte cliquer sur le lien suivant".$urlVerification;
+    Toolbox::sendMail($MAIL,$sujet,$message);
+  }
 
   public function pageErreur($msg){
      parent::pageErreur($msg);
