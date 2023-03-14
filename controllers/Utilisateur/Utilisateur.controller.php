@@ -50,13 +50,13 @@ class UtilisateurController extends MainController{
   public function validation_creerCompte($NOM_CLIENT,$MDP,$MAIL){
     if($this->utilisateurManager->verifLoginDisponible($NOM_CLIENT)){
       $passwordCrypt= password_hash($MDP, PASSWORD_DEFAULT);
-      // $clef = rand(0,9999); // a voir apres 
+      $clef = rand(0,9999); // a voir apres 
       if($this->utilisateurManager->bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL)){
-        $this->sendMailValidation($NOM_CLIENT, $MAIL);
-        Toolbox::ajouterMessageAlerte("Le compte a  été créer ! ",Toolbox::COULEUR_VERTE);
+        $this->sendMailValidation($NOM_CLIENT,$MAIL,$clef);
+        Toolbox::ajouterMessageAlerte("Le compte a  été créer ! Un mail de validation vous a été envoyé !",Toolbox::COULEUR_VERTE);
         header("Location: ".URL."login");
       }else{
-        Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencer !",Toolbox::COULEUR_ROUGE);
+        Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !",Toolbox::COULEUR_ROUGE);
         header("Location: ".URL."creeCompte");
       }
     }else {
@@ -65,8 +65,8 @@ class UtilisateurController extends MainController{
     }
   }
 
-  private  function sendMailValidation( $NOM_CLIENT, $MAIL){
-    $urlVerification = URL."validationMail/".$NOM_CLIENT."/";
+  private function sendMailValidation($NOM_CLIENT,$MAIL,$clef){
+    $urlVerification = URL." validationMail/".$NOM_CLIENT."/".$clef;
     $sujet = "Création du compte sur le site < ... > ";
     $message = "Pour valider votre compte cliquer sur le lien suivant".$urlVerification;
     Toolbox::sendMail($MAIL,$sujet,$message);

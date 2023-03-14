@@ -9,7 +9,7 @@
         <input value="" type="password" class="form-control" id="MDP" name="MDP" required>
     </div>
     <div class="mb-3">
-        <label for="MAIL" class="form-label">Password</label>
+        <label for="MAIL" class="form-label">Mail</label>
         <input value="" type="mail" class="form-control" id="MAIL" name="MAIL" required>
     </div>
 
