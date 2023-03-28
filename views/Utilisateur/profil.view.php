@@ -24,6 +24,10 @@
                     </svg>
                     </button>
                 </div>
-            
+            </div>
+        </form>
+    </div>
 
-</div>
+    <div>
+        <a href="<?= URL; ?>compte/modificationPassword" class="btn btn-warning">changer le mdp</a>
+    </div>
