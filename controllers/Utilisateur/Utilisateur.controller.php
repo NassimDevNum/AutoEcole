@@ -35,6 +35,7 @@ class UtilisateurController extends MainController{
       "page_description" => "Page de profil",
       "page_title" => "Page de profil",
       "utilisateur" => $datas,       //         // info de l'utilisateur vers la vu grace à cette ligne 
+      "page_javascript"=>['profil.js'],
       "view" => "views/Utilisateur/profil.view.php",
       "template" => "views/common/template.php"
   ];
@@ -70,6 +71,16 @@ class UtilisateurController extends MainController{
     $sujet = "Création du compte sur le site < ... > ";
     $message = "Pour valider votre compte cliquer sur le lien suivant".$urlVerification;
     Toolbox::sendMail($MAIL,$sujet,$message);
+  }
+
+
+  public function validation_modificationMail($MAIL){
+    if($this->utilisateurManager->bdModificationMailUser($_SESSION['profil']['NOM_CLIENT'], $MAIL)){
+      Toolbox::ajouterMessageAlerte("la modification est effectuée", Toolbox::COULEUR_VERTE);
+    } else {
+      Toolbox::ajouterMessageAlerte("Aucune modification effectuée", Toolbox::COULEUR_ROUGE);
+    }
+    header("Location: ".URL."compte/profil");
   }
 
   public function pageErreur($msg){

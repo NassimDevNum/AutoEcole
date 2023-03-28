@@ -49,5 +49,19 @@ class UtilisateurManager extends MainManager{
         return empty($client);
     }
 
+    /* valider compte non necessaire */
+
+    public function bdModificationMailUser($NOM_CLIENT,$MAIL){
+        $req = "UPDATE client set MAIL  = :MAIL WHERE NOM_CLIENT = :NOM_CLIENT";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
+        $stmt->bindValue(":MAIL",$MAIL,PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
+
     } 
 ?>

@@ -1,4 +1,7 @@
 <?php
+
+use Random\Engine\Secure;
+
 session_start();
 
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS'])? "https" : "http").
@@ -57,7 +60,9 @@ try {
             switch($url[1]){
                 case "profil": $utilisateurController->profil();
                 break;
-              case "deconnexion" : $utilisateurController->deconnexion();
+                case "deconnexion" : $utilisateurController->deconnexion();
+                break;
+                case "validation_modificationMail" : $utilisateurController -> validation_modificationMail(Securite::secureHTML($_POST['MAIL']));
                 break;
                 default : throw new Exception("La page n'existe pas"); //sans le default ça nous affiche une page blanche 
             }
