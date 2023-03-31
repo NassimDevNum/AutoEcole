@@ -66,6 +66,18 @@ try {
                 break;
                 case "modificationPassword" : $utilisateurController -> modificationPassword();
                 break;
+                case "validation_modificationPassword" : 
+                    if(!empty($_POST['ancienMDP']) && !empty($_POST['newMDP']) && !empty($_POST['confirmMDP'])){
+                        $ancienMDP = Securite::secureHTML($_POST['ancienMDP']);
+                        $newMDP =Securite::secureHTML($_POST['newMDP']);
+                        $confirmMDP =Securite::secureHTML($_POST['confirmMDP']);
+                        $utilisateurController->validation_modificationPassword($ancienMDP,$newMDP,$confirmMDP);
+                       
+                    } else {
+                        Toolbox::ajouterMessageAlerte('Vous avez pas renseigné toutes les information',Toolbox::COULEUR_ROUGE);
+                        header('Location: '.URL.'compte/modificationPassword');
+                    }
+                    break;
                 default : throw new Exception("La page n'existe pas"); //sans le default ça nous affiche une page blanche 
             }
         }

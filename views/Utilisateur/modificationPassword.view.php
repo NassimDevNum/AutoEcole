@@ -13,6 +13,8 @@
         <label for="confirmMDP" class="form-label">confirmation new mdp</label>
         <input type="password" class="form-control" id="confirmMDP" name="confirmMDP" required>
     </div>
-
-    <button type="submit" class="btn btn-primary">Valider</button>
+    <div class="alert alert-danger d-none" id="erreur">
+        Les mdp ne corresspondent pas 
+    </div>
+    <button type="submit" class="btn btn-primary" disabled>Valider</button>
 </form>

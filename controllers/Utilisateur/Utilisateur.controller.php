@@ -83,10 +83,29 @@ class UtilisateurController extends MainController{
     header("Location: ".URL."compte/profil");
   }
 
+  public function validation_modificationPassword($ancienMDP,$newMDP,$confirmMDP){
+    if ($newMDP === $confirmMDP) {
+      if($this->utilisateurManager->isCombinaisonValide($_SESSION['profil']['NOM_CLIENT'], $ancienMDP)){
+          $passwordCrypt = password_hash($newMDP,PASSWORD_DEFAULT);
+          if($this->utilisateurManager->bdModificationPassword($_SESSION['profil']['NOM_CLIENT'],$passwordCrypt)){
+            Toolbox::ajouterMessageAlerte('La modification mdp est prise en compte',Toolbox::COULEUR_VERTE);
+            header('Location: '.URL.'compte/profil');
+          } else { 
+        Toolbox::ajouterMessageAlerte('Modification a echouée',Toolbox::COULEUR_ROUGE);
+      header('Location: '.URL.'compte/modificationPassword');
+      }
+    } else {
+      Toolbox::ajouterMessageAlerte('Les mdp ne correspondent pas',Toolbox::COULEUR_ROUGE);
+      header('Location: '.URL.'compte/modificationPassword');
+  }
+}
+  }
+
   public function modificationPassword(){
     $data_page = [
       "page_description" => "Page de modification du password",
       "page_title" => "Page modification du password",
+      "page_javascript" => ["modificationPassword.js"],
       "view" => "views/Utilisateur/modificationPassword.view.php",
       "template" => "views/common/template.php"
   ];

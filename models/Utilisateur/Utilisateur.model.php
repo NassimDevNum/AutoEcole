@@ -62,7 +62,16 @@ class UtilisateurManager extends MainManager{
         return $estModifier;
     }
 
-
+    public function bdModificationPassword($NOM_CLIENT,$MDP){
+        $req = "UPDATE client set MDP  = :MDP WHERE NOM_CLIENT = :NOM_CLIENT";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
+        $stmt->bindValue(":MDP",$MDP,PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
 
     } 
 ?>
