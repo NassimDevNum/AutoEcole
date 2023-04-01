@@ -83,6 +83,17 @@ class UtilisateurController extends MainController{
     header("Location: ".URL."compte/profil");
   }
 
+  public function modificationPassword(){
+    $data_page = [
+      "page_description" => "Page de modification du password",
+      "page_title" => "Page modification du password",
+      "page_javascript" => ["modificationPassword.js"],
+      "view" => "views/Utilisateur/modificationPassword.view.php",
+      "template" => "views/common/template.php"
+  ];
+  $this->genererPage($data_page);
+  }
+
   public function validation_modificationPassword($ancienMDP,$newMDP,$confirmMDP){
     if ($newMDP === $confirmMDP) {
       if($this->utilisateurManager->isCombinaisonValide($_SESSION['profil']['NOM_CLIENT'], $ancienMDP)){
@@ -101,15 +112,16 @@ class UtilisateurController extends MainController{
 }
   }
 
-  public function modificationPassword(){
-    $data_page = [
-      "page_description" => "Page de modification du password",
-      "page_title" => "Page modification du password",
-      "page_javascript" => ["modificationPassword.js"],
-      "view" => "views/Utilisateur/modificationPassword.view.php",
-      "template" => "views/common/template.php"
-  ];
-  $this->genererPage($data_page);
+
+
+  public function suppressionCompte(){
+    if($this->utilisateurManager->bdSuppressionCompte($_SESSION['profil']['NOM_CLIENT'])){
+      Toolbox::ajouterMessageAlerte('la Suppression du compte est un succès',Toolbox::COULEUR_VERTE);
+      $this->deconnexion();
+    } else {
+      Toolbox::ajouterMessageAlerte("la Suppression n'a pas été effectuée. Contacter l'administrateur",Toolbox::COULEUR_VERTE);
+      header('Location: '.URL.'compte/profil');
+    }
   }
 
   public function pageErreur($msg){

@@ -73,5 +73,16 @@ class UtilisateurManager extends MainManager{
         return $estModifier;
     }
 
+
+    public function bdSuppressionCompte($NOM_CLIENT){
+        $req = "DELETE from client where NOM_CLIENT = :NOM_CLIENT";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
     } 
 ?>
