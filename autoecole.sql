@@ -160,6 +160,19 @@ CREATE TABLE IF NOT EXISTS `modele` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lecon`
+--
+
+DROP TABLE IF EXISTS `lecon`;
+CREATE TABLE IF NOT EXISTS `lecon` (
+  `N_LECON` int(11) NOT NULL,
+  `NOM_MODELE` char(50) DEFAULT NULL,
+  PRIMARY KEY (`N_LECON`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `moniteur`
 --
 
