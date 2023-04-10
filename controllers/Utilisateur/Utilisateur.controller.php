@@ -124,6 +124,12 @@ class UtilisateurController extends MainController{
     }
   }
 
+
+
+  public function prendreUnCours(){
+    
+  }
+
   public function pageErreur($msg){
      parent::pageErreur($msg);
   }

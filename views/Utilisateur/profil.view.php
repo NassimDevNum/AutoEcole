@@ -1,4 +1,18 @@
 <h1>Profil de <?= $utilisateur['NOM_CLIENT']?> </h1> 
+
+
+
+<div id="prendreUnCours">
+
+<button class="btn btn-primary" id="btnModifMail"> 
+   Nouveau cours</button>
+
+   <br>
+   <br>
+
+</div>
+
+
 <div id='mail'>
     mail : <?= $utilisateur['MAIL'] ?>
     <button class="btn btn-primary" id="btnModifMail"> 
@@ -7,7 +21,11 @@
   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 </svg>
     </button>
+
+    <br>
+    <br>
 </div>
+
 
 <div id="modificationMail" class= "d-none">
     <form method="POST" action="<?= URL; ?>compte/validation_modificationMail">
@@ -28,6 +46,7 @@
     </form>
 </div>
 
+
 <div>
     <a href="<?= URL; ?>compte/modificationPassword" class="btn btn-warning">changer le mdp</a>
     <button id="btnSupCompte" class="btn btn-danger">Supprimer mon compte</button>
@@ -39,3 +58,4 @@
         <a href="<?= URL ?>compte/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement</a>
     </div>
 </div>
+

@@ -78,8 +78,9 @@ try {
                         header('Location: '.URL.'compte/modificationPassword');
                     }
                     break;
-                    case "suppressionCompte" : $utilisateurController->suppressionCompte();
-                    break;
+                case "suppressionCompte" : $utilisateurController->suppressionCompte();
+                break;
+                // ajouter la prise de rdv ici
                 default : throw new Exception("La page n'existe pas"); //sans le default ça nous affiche une page blanche 
             }
         }
