@@ -125,10 +125,16 @@ class UtilisateurController extends MainController{
   }
 
 
-
   public function prendreUnCours(){
-    
+    $data_page = [
+      "page_description" => "Page de prise de rdc",
+      "page_title" => "prendrecours",
+      "view" => "views/Utilisateur/newCours.view.php",
+      "template" => "views/common/template.php"
+  ];
+  $this->genererPage($data_page);
   }
+
 
   public function pageErreur($msg){
      parent::pageErreur($msg);

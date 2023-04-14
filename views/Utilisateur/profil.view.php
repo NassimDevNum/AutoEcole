@@ -2,14 +2,11 @@
 
 
 
-<div id="prendreUnCours">
 
-<button class="btn btn-primary" id="btnModifMail"> 
-   Nouveau cours</button>
-
+<div>
+    <a href="<?= URL; ?>compte/newCours" class="btn btn-primary">prendre Cours</a>
+    <br>
    <br>
-   <br>
-
 </div>
 
 
