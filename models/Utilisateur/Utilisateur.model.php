@@ -84,5 +84,24 @@ class UtilisateurManager extends MainManager{
         return $estModifier;
     }
 
+    /* prendre son cours*/
+    public function ajouterCours($N_LECON, $N_CLIENT, $N_MONITEUR, $CODE_MODELE, $DATE_HEURE_DEBUT, $DATE_HEURE_FIN){
+        $req = "INSERT INTO planning (N_LECON, N_CLIENT, N_MONITEUR, CODE_MODELE, DATE_HEURE_DEBUT, DATE_HEURE_FIN) 
+        VALUES (:date, :N_LECON, :N_CLIENT, :N_MONITEUR, :CODE_MODELE, :DATE_HEURE_DEBUT, :DATE_HEURE_FIN)";
+        $stmt = $this->getBdd()->prepare($req);
+        
+        $stmt->bindValue(":N_LECON",$N_LECON,PDO::PARAM_INT);
+        $stmt->bindValue(":N_CLIENT",$N_CLIENT,PDO::PARAM_INT);
+        $stmt->bindValue(":N_MONITEUR",$N_MONITEUR,PDO::PARAM_INT);
+        $stmt->bindValue(":CODE_MODELE",$CODE_MODELE,PDO::PARAM_STR);
+        $stmt->bindValue(":DATE_HEURE_DEBUT",$DATE_HEURE_DEBUT,PDO::PARAM_STR);
+        $stmt->bindValue(":DATE_HEURE_FIN",$DATE_HEURE_FIN,PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->closeCursor();
+
+        /* pas sur */
+        return $stmt->execute();
+    }
+
     } 
 ?>

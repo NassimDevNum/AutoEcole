@@ -27,7 +27,7 @@ class UtilisateurController extends MainController{
   //}
   public function profil (){
     $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['NOM_CLIENT']);
-    //$_SESSION['profil']['role'] = $datas['role']; // à voir apres
+    $_SESSION['profil']['role'] = $datas['role']; // à voir apres
 
     //$_SESSION['profil']
 
