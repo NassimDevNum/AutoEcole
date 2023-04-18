@@ -27,7 +27,7 @@ class UtilisateurController extends MainController{
   //}
   public function profil (){
     $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['NOM_CLIENT']);
-    $_SESSION['profil']['role'] = $datas['role']; // à voir apres
+    //$_SESSION['profil']['role'] = $datas['role']; // à voir apres
 
     //$_SESSION['profil']
 
@@ -123,18 +123,6 @@ class UtilisateurController extends MainController{
       header('Location: '.URL.'compte/profil');
     }
   }
-
-
-  public function prendreUnCours(){
-    $data_page = [
-      "page_description" => "Page de prise de rdc",
-      "page_title" => "prendrecours",
-      "view" => "views/Utilisateur/newCours.view.php",
-      "template" => "views/common/template.php"
-  ];
-  $this->genererPage($data_page);
-  }
-
 
   public function pageErreur($msg){
      parent::pageErreur($msg);
