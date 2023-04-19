@@ -40,16 +40,54 @@
         <a href="<?= URL ?>compte/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement</a>
     </div>
 </div>
-<div id='calendar'>bjr</div>
+
+
+<div id='calendar'></div>
+
+<?php
+
+$host = 'localhost';
+$dbname = 'autoecole';
+$username = 'root';
+$password = '';
+
+
+                
+try {
+    $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+} catch(PDOException $e) {
+    echo $e->getMessage();
+}
+
+// Récupération des événements depuis la base de données
+$req = $bdd->query('SELECT * FROM planning');
+$events = [];
+
+while ($donnees = $req->fetch()) {
+    $event = [
+        'title' => $donnees['N_LECON'],
+        'start' => $donnees['DATE_HEURE_DEBUT'],
+        'end' => $donnees['DATE_HEURE_FIN'],
+       // 'backgroundColor' => $donnees['COULEUR']
+    ];
+
+    $events[] = $event;
+}
+
+// Retourne les événements au format JSON
+echo json_encode($events);
+?>
 
 <script> 
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+    var now = new Date();
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
-        initialDate: '2023-03-01',
-        events: []
+        initialDate: now.getFullYear() + '-' + (now.getMonth() + 1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0'),
+        events: <?php echo json_encode($events); ?>
     });
     calendar.render();
     });
+
 </script>
