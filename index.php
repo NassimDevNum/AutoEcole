@@ -80,6 +80,9 @@ try {
                     break;
                     case "suppressionCompte" : $utilisateurController->suppressionCompte();
                     break;
+                    
+        case "prendreRdv" : $utilisateurController -> prendreRdv();
+        break;
                 default : throw new Exception("La page n'existe pas"); //sans le default ça nous affiche une page blanche 
             }
         }

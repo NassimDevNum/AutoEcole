@@ -1,5 +1,6 @@
 
 <h1>Profil de <?= $utilisateur['NOM_CLIENT']?> </h1> 
+
 <div id='mail'>
     mail : <?= $utilisateur['MAIL'] ?>
     <button class="btn btn-primary" id="btnModifMail"> 
@@ -29,10 +30,21 @@
     </form>
 </div>
 
+<br>
+<br>
+
+<div>
+    <a href="<?= URL ?>compte/prendreRdv" class="btn btn-info">Prendre Un Rdv</a>
+</div>
+<br>
+
 <div>
     <a href="<?= URL; ?>compte/modificationPassword" class="btn btn-warning">changer le mdp</a>
     <button id="btnSupCompte" class="btn btn-danger">Supprimer mon compte</button>
 </div>
+<br>
+<br>
+
 <div id="suppressionCompte" class="d-none m-2">
     <div class="alert alert-danger">
         Veuillez confirmer la suppression du compte. 

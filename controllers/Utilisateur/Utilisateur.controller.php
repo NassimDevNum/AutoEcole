@@ -124,6 +124,19 @@ class UtilisateurController extends MainController{
     }
   }
 
+
+  public function prendreRdv(){
+    
+    $data_page = [
+      "page_description" => "Page de prise de RDV",
+      "page_title" => "Page de prise de RDV",
+      "view" => "views/Utilisateur/prendreRdv.view.php",
+      "template" => "views/common/template.php"
+  ];
+  $this->genererPage($data_page);
+  }
+  
+
   public function pageErreur($msg){
      parent::pageErreur($msg);
   }
