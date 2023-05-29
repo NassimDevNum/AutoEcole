@@ -27,9 +27,7 @@ class UtilisateurController extends MainController{
   //}
   public function profil (){
     $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['NOM_CLIENT']);
-    //$_SESSION['profil']['role'] = $datas['role']; // à voir apres
-
-    //$_SESSION['profil']
+    $_SESSION['profil']['ROLE'] = $datas['ROLE'];
 
     $data_page = [
       "page_description" => "Page de profil",
@@ -52,7 +50,7 @@ class UtilisateurController extends MainController{
     if($this->utilisateurManager->verifLoginDisponible($NOM_CLIENT)){
       $passwordCrypt= password_hash($MDP, PASSWORD_DEFAULT);
       $clef = rand(0,9999); // a voir apres 
-      if($this->utilisateurManager->bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL)){
+      if($this->utilisateurManager->bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL,"utilisateur","utilisateur")){
         $this->sendMailValidation($NOM_CLIENT,$MAIL,$clef);
         Toolbox::ajouterMessageAlerte("Le compte a  été créer ! Un mail de validation vous a été envoyé !",Toolbox::COULEUR_VERTE);
         header("Location: ".URL."login");

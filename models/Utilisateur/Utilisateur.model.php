@@ -31,13 +31,14 @@ class UtilisateurManager extends MainManager{
         return $resultat;
     }
 
-    public function bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL){
-        $req = "INSERT INTO client (NOM_CLIENT, MDP, MAIL)
-        VALUES (:NOM_CLIENT, :MDP, :MAIL)" ;
+    public function bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL,$ROLE){
+        $req = "INSERT INTO client (NOM_CLIENT, MDP, MAIL, ROLE)
+        VALUES (:NOM_CLIENT, :MDP, :MAIL, :ROLE)" ;
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
         $stmt->bindValue(":MDP",$passwordCrypt,PDO::PARAM_STR);
         $stmt->bindValue(":MAIL",$MAIL,PDO::PARAM_STR);
+        $stmt->bindValue(":ROLE",$ROLE,PDO::PARAM_STR);
         $stmt->execute();
         $estModifier = ($stmt->rowCount() > 0);
         $stmt->closeCursor();
