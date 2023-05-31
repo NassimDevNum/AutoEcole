@@ -17,7 +17,7 @@
 <body>
     <?php require_once("views/common/header.php"); ?>
 
-    <div class="container">
+    <div class="container-fluid">
         <?php 
             if(!empty($_SESSION['alert'])) {
                 foreach($_SESSION['alert'] as $alert){
