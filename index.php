@@ -11,9 +11,11 @@ require_once("./controllers/Toolbox.class.php"); //cette page permet de generer 
 require_once("./controllers/Securite.class.php");
 require_once("./controllers/Visiteur/Visiteur.controller.php");
 require_once("./controllers/Utilisateur/Utilisateur.controller.php");
+require_once("./controllers/Administrateur/Administrateur.controller.php");
 
 $visiteurController = new VisiteurController();
 $utilisateurController= new UtilisateurController();
+$administrateurController= new AdministrateurController();
 
 try {
     if(empty($_GET['page'])){
@@ -80,10 +82,29 @@ try {
                     break;
                     case "suppressionCompte" : $utilisateurController->suppressionCompte();
                     break;
+                    
+        case "prendreRdv" : $utilisateurController -> prendreRdv();
+        break;
                 default : throw new Exception("La page n'existe pas"); //sans le default ça nous affiche une page blanche 
             }
         }
         break;
+        case "administration" : 
+            if(!Securite::estConnecte()){
+                Toolbox::ajouterMessageAlerte("Veuillez vous connecter !",Toolbox::COULEUR_ROUGE);
+                header('Location: '.URL.'login');
+            }   elseif(!Securite::estAdministrateur()){
+                Toolbox::ajouterMessageAlerte("Vous avez pas le droit d'être ici !",Toolbox::COULEUR_ROUGE);
+                header('Location: '.URL.'accueil');
+            }   else {
+                switch($url[1]){
+                    case "droits" : $administrateurController->droits();
+                    break;     
+                    case "validation_modificationRole"  : $administrateurController->validation_modificationRole($_POST['NOM_CLIENT'],$_POST['ROLE']);  
+                    break;
+                    default : throw new Exception("La page n'existe pas");
+                }
+            }
         default : throw new Exception("La page n'existe pas");
     }
 } catch (Exception $e){

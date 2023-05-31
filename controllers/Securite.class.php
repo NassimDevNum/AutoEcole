@@ -8,6 +8,13 @@ class Securite {
     public static function estConnecte(){
         return(!empty($_SESSION['profil']));
     }
+
+    public static function estUtilisateur(){
+        return(($_SESSION['profil']['ROLE'] === "utilisateur"));
+    }
+    public static function estAdministrateur(){
+        return(($_SESSION['profil']['ROLE'] === "administrateur"));
+    }
 }
 
 ?>
