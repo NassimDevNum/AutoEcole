@@ -1,5 +1,4 @@
 
-<h1>Profil de <?= $utilisateur['NOM_CLIENT']?> </h1> <br>
 <h1>Profil de <?= $utilisateur['NOM_CLIENT']?> </h1> 
 
 <div id='mail'>
@@ -11,7 +10,7 @@
 </svg>
     </button>
 </div>
-<br>
+
 <div id="modificationMail" class= "d-none">
     <form method="POST" action="<?= URL; ?>compte/validation_modificationMail">
         <div class="row">
