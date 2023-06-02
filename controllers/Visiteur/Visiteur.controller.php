@@ -33,7 +33,7 @@ class VisiteurController extends MainController{
     public function creerCompte(){
         $data_page = [
             "page_description" => "Page de création de compte",
-            "page_title" => "Page de création de compte",    // info trans vers la vu grace à cette ligne 
+            "page_title" => "Page d'inscription'",    // info trans vers la vu grace à cette ligne 
             "view" => "views/Visiteur/creerCompte.view.php",
             "template" => "views/common/template.php"
         ];

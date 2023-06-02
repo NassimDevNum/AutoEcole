@@ -31,19 +31,50 @@ class UtilisateurManager extends MainManager{
         return $resultat;
     }
 
-    public function bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL,$ROLE){
-        $req = "INSERT INTO client (NOM_CLIENT, MDP, MAIL, ROLE)
-        VALUES (:NOM_CLIENT, :MDP, :MAIL, :ROLE)" ;
+    // public function bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL,$ROLE){
+    //     $req = "INSERT INTO client (NOM_CLIENT, MDP, MAIL, ROLE)
+    //     VALUES (:NOM_CLIENT, :MDP, :MAIL, :ROLE)" ;
+    //     $stmt = $this->getBdd()->prepare($req);
+    //     $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
+    //     $stmt->bindValue(":MDP",$passwordCrypt,PDO::PARAM_STR);
+    //     $stmt->bindValue(":MAIL",$MAIL,PDO::PARAM_STR);
+    //     $stmt->bindValue(":ROLE",$ROLE,PDO::PARAM_STR);
+    //     $stmt->execute();
+    //     $estModifier = ($stmt->rowCount() > 0);
+    //     $stmt->closeCursor();
+    //     return $estModifier;
+    // }
+
+    public function bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $passwordCrypt, $ROLE){
+        $req = "INSERT INTO client (NOM_CLIENT, PRENOM_CLIENT, DATE_NAISSANCE, NUMERO_TELEPHONE, MAIL, ADRESSE, MDP, ROLE)
+        VALUES (:NOM_CLIENT, :PRENOM_CLIENT, :DATE_NAISSANCE, :NUMERO_TELEPHONE, :MAIL, :ADRESSE, :MDP, :ROLE)" ;
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
-        $stmt->bindValue(":MDP",$passwordCrypt,PDO::PARAM_STR);
-        $stmt->bindValue(":MAIL",$MAIL,PDO::PARAM_STR);
-        $stmt->bindValue(":ROLE",$ROLE,PDO::PARAM_STR);
+        $stmt->bindValue(":NOM_CLIENT", $nom, PDO::PARAM_STR);
+        $stmt->bindValue(":PRENOM_CLIENT", $prenom, PDO::PARAM_STR);
+        $stmt->bindValue(":DATE_NAISSANCE", $date_naissance, PDO::PARAM_STR);
+        $stmt->bindValue(":NUMERO_TELEPHONE", $numero_telephone, PDO::PARAM_STR);
+        $stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
+        $stmt->bindValue(":ADRESSE", $adresse, PDO::PARAM_STR);
+        $stmt->bindValue(":MDP", $passwordCrypt, PDO::PARAM_STR);
+        $stmt->bindValue(":ROLE", $ROLE, PDO::PARAM_STR);
         $stmt->execute();
         $estModifier = ($stmt->rowCount() > 0);
         $stmt->closeCursor();
         return $estModifier;
     }
+    
+    public function verifMailDisponible($mail) {
+        $req = "SELECT COUNT(*) as nb FROM client WHERE MAIL = :mail";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":mail", $mail, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        
+        // Si le nombre de correspondances est égal à 0, cela signifie que l'email n'est pas utilisé, retourner true
+        return $resultat['nb'] == 0;
+    }
+    
 
     public function verifLoginDisponible($NOM_CLIENT){
         $client = $this->getUserInformation($NOM_CLIENT);

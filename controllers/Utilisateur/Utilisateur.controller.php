@@ -46,23 +46,24 @@ class UtilisateurController extends MainController{
     header("Location: ".URL."accueil");
   }
 
-  public function validation_creerCompte($NOM_CLIENT,$MDP,$MAIL){
-    if($this->utilisateurManager->verifLoginDisponible($NOM_CLIENT)){
-      $passwordCrypt= password_hash($MDP, PASSWORD_DEFAULT);
-      $clef = rand(0,9999); // a voir apres 
-      if($this->utilisateurManager->bdCreerCompte($NOM_CLIENT,$passwordCrypt,$MAIL,"utilisateur","utilisateur")){
-        $this->sendMailValidation($NOM_CLIENT,$MAIL,$clef);
-        Toolbox::ajouterMessageAlerte("Le compte a  été créer ! Un mail de validation vous a été envoyé !",Toolbox::COULEUR_VERTE);
+  public function validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $password){
+    if($this->utilisateurManager->verifMailDisponible($mail)){
+      $passwordCrypt= password_hash($password, PASSWORD_DEFAULT);
+      if($this->utilisateurManager->bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $passwordCrypt, "utilisateur")){
+        $clef = rand(0,9999); // a voir apres
+        $this->sendMailValidation($nom, $mail, $clef);
+        Toolbox::ajouterMessageAlerte("Le compte a été créé ! Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
         header("Location: ".URL."login");
       }else{
-        Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !",Toolbox::COULEUR_ROUGE);
-        header("Location: ".URL."creeCompte");
+        Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !", Toolbox::COULEUR_ROUGE);
+        header("Location: ".URL."creerCompte");
       }
     }else {
-      Toolbox::ajouterMessageAlerte("Le login est déjà utilisé ! ", Toolbox::COULEUR_ROUGE);
+      Toolbox::ajouterMessageAlerte("Le mail est déjà utilisé ! ", Toolbox::COULEUR_ROUGE);
       header("Location: ".URL."creerCompte");
     }
   }
+
 
   private function sendMailValidation($NOM_CLIENT,$MAIL,$clef){
     $urlVerification = URL." validationMail/".$NOM_CLIENT."/".$clef;

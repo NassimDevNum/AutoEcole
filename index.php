@@ -44,16 +44,28 @@ try {
         case "creerCompte" : $visiteurController->creerCompte();
         break;
         case "validation_creerCompte" :
-            if(!empty($_POST['NOM_CLIENT']) && !empty($_POST['MDP']) && !empty($_POST['MAIL'])){
-                $NOM_CLIENT = Securite::secureHTML($_POST['NOM_CLIENT']);
-                $MDP = Securite::secureHTML($_POST['MDP']);
-                $MAIL = Securite::secureHTML($_POST['MAIL']);
-                $utilisateurController->validation_creerCompte($NOM_CLIENT,$MDP,$MAIL);
+            if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['date_naissance']) && !empty($_POST['numero_telephone']) && !empty($_POST['mail']) && !empty($_POST['adresse']) && !empty($_POST['mot_de_passe']) && !empty($_POST['confirmation_mot_de_passe'])){
+                $nom = Securite::secureHTML($_POST['nom']);
+                $prenom = Securite::secureHTML($_POST['prenom']);
+                $date_naissance = Securite::secureHTML($_POST['date_naissance']);
+                $numero_telephone = Securite::secureHTML($_POST['numero_telephone']);
+                $mail = Securite::secureHTML($_POST['mail']);
+                $adresse = Securite::secureHTML($_POST['adresse']);
+                $mot_de_passe = Securite::secureHTML($_POST['mot_de_passe']);
+                $confirmation_mot_de_passe = Securite::secureHTML($_POST['confirmation_mot_de_passe']);
+        
+                if ($mot_de_passe === $confirmation_mot_de_passe) {
+                    $utilisateurController->validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe);
+                } else {
+                    Toolbox::ajouterMessageAlerte("Le mot de passe et la confirmation du mot de passe ne correspondent pas!", Toolbox::COULEUR_ROUGE);
+                    header('Location: '.URL.'creerCompte');
+                }
             }else {
-                Toolbox::ajouterMessageAlerte("les 3 information sont obligatoires !", Toolbox::COULEUR_ROUGE);
+                Toolbox::ajouterMessageAlerte("Tous les champs sont obligatoires !", Toolbox::COULEUR_ROUGE);
                 header('Location: '.URL.'creerCompte');
             }
         break;
+        
         case "compte" : 
            if (!Securite::estConnecte()){  //le if suivant vérifie si on est bien co ou pas 
             Toolbox::ajouterMessageAlerte('Veuiller vous connecter !', Toolbox::COULEUR_ROUGE);
