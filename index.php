@@ -43,8 +43,8 @@ try {
         break;
         case "creerCompte" : $visiteurController->creerCompte();
         break;
-        case "validation_creerCompte" :
-            if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['date_naissance']) && !empty($_POST['numero_telephone']) && !empty($_POST['mail']) && !empty($_POST['adresse']) && !empty($_POST['mot_de_passe']) && !empty($_POST['confirmation_mot_de_passe'])){
+        case "validation_creerCompte":
+            if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['date_naissance']) && !empty($_POST['numero_telephone']) && !empty($_POST['mail']) && !empty($_POST['adresse']) && !empty($_POST['mot_de_passe'])) {
                 $nom = Securite::secureHTML($_POST['nom']);
                 $prenom = Securite::secureHTML($_POST['prenom']);
                 $date_naissance = Securite::secureHTML($_POST['date_naissance']);
@@ -52,19 +52,14 @@ try {
                 $mail = Securite::secureHTML($_POST['mail']);
                 $adresse = Securite::secureHTML($_POST['adresse']);
                 $mot_de_passe = Securite::secureHTML($_POST['mot_de_passe']);
-                $confirmation_mot_de_passe = Securite::secureHTML($_POST['confirmation_mot_de_passe']);
-        
-                if ($mot_de_passe === $confirmation_mot_de_passe) {
-                    $utilisateurController->validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe);
-                } else {
-                    Toolbox::ajouterMessageAlerte("Le mot de passe et la confirmation du mot de passe ne correspondent pas!", Toolbox::COULEUR_ROUGE);
-                    header('Location: '.URL.'creerCompte');
-                }
-            }else {
+                
+                $utilisateurController->validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe);
+            } else {
                 Toolbox::ajouterMessageAlerte("Tous les champs sont obligatoires !", Toolbox::COULEUR_ROUGE);
-                header('Location: '.URL.'creerCompte');
+                header('Location: ' . URL . 'creerCompte');
             }
-        break;
+            break;        
+
         
         case "compte" : 
            if (!Securite::estConnecte()){  //le if suivant vérifie si on est bien co ou pas 

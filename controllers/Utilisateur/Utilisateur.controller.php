@@ -41,28 +41,30 @@ class UtilisateurController extends MainController{
   }
 
   public function deconnexion(){
-    Toolbox::ajouterMessageAlerte("Dexonnexion efectuée",Toolbox::COULEUR_VERTE);
+    Toolbox::ajouterMessageAlerte("Dexonnexion effectuée",Toolbox::COULEUR_VERTE);
     unset($_SESSION['profil']);
     header("Location: ".URL."accueil");
   }
 
-  public function validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $password){
-    if($this->utilisateurManager->verifMailDisponible($mail)){
-      $passwordCrypt= password_hash($password, PASSWORD_DEFAULT);
-      if($this->utilisateurManager->bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $passwordCrypt, "utilisateur")){
-        $clef = rand(0,9999); // a voir apres
-        $this->sendMailValidation($nom, $mail, $clef);
-        Toolbox::ajouterMessageAlerte("Le compte a été créé ! Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
-        header("Location: ".URL."login");
-      }else{
-        Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !", Toolbox::COULEUR_ROUGE);
-        header("Location: ".URL."creerCompte");
+  public function validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe)
+  {
+      if ($this->utilisateurManager->verifMailDisponible($mail)) {
+          $mot_de_passe_crypte = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+          if ($this->utilisateurManager->bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe_crypte, "utilisateur"  )) {
+              $clef = rand(0, 9999); // À voir après
+              $this->sendMailValidation($nom, $mail, $clef);
+              Toolbox::ajouterMessageAlerte("Le compte a été créé ! Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
+              header("Location: " . URL . "login");
+          } else {
+              Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !", Toolbox::COULEUR_ROUGE);
+              header("Location: " . URL . "creerCompte");
+          }
+      } else {
+          Toolbox::ajouterMessageAlerte("Le mail est déjà utilisé !", Toolbox::COULEUR_ROUGE);
+          header("Location: " . URL . "creerCompte");
       }
-    }else {
-      Toolbox::ajouterMessageAlerte("Le mail est déjà utilisé ! ", Toolbox::COULEUR_ROUGE);
-      header("Location: ".URL."creerCompte");
-    }
   }
+  
 
 
   private function sendMailValidation($NOM_CLIENT,$MAIL,$clef){

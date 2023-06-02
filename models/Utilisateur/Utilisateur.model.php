@@ -45,23 +45,26 @@ class UtilisateurManager extends MainManager{
     //     return $estModifier;
     // }
 
-    public function bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $passwordCrypt, $ROLE){
-        $req = "INSERT INTO client (NOM_CLIENT, PRENOM_CLIENT, DATE_NAISSANCE, NUMERO_TELEPHONE, MAIL, ADRESSE, MDP, ROLE)
-        VALUES (:NOM_CLIENT, :PRENOM_CLIENT, :DATE_NAISSANCE, :NUMERO_TELEPHONE, :MAIL, :ADRESSE, :MDP, :ROLE)" ;
+    public function bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $passwordCrypt, $role)
+    {
+        $req = "INSERT INTO CLIENT (NOM_CLIENT, PRENOM_CLIENT, ADRESSE_CLIENT, DATE_DE_NAISSANCE, TEL, DATE_INSCRIPTION, MAIL, MOT_DE_PASSE, ROLE)
+        VALUES (:NOM_CLIENT, :PRENOM_CLIENT, :ADRESSE_CLIENT, :DATE_DE_NAISSANCE, :TEL, NOW(), :MAIL, :MOT_DE_PASSE, :ROLE)";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":NOM_CLIENT", $nom, PDO::PARAM_STR);
         $stmt->bindValue(":PRENOM_CLIENT", $prenom, PDO::PARAM_STR);
-        $stmt->bindValue(":DATE_NAISSANCE", $date_naissance, PDO::PARAM_STR);
-        $stmt->bindValue(":NUMERO_TELEPHONE", $numero_telephone, PDO::PARAM_STR);
+        $stmt->bindValue(":ADRESSE_CLIENT", $adresse, PDO::PARAM_STR);
+        $stmt->bindValue(":DATE_DE_NAISSANCE", $date_naissance, PDO::PARAM_STR);
+        $stmt->bindValue(":TEL", $numero_telephone, PDO::PARAM_STR);
         $stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
-        $stmt->bindValue(":ADRESSE", $adresse, PDO::PARAM_STR);
-        $stmt->bindValue(":MDP", $passwordCrypt, PDO::PARAM_STR);
-        $stmt->bindValue(":ROLE", $ROLE, PDO::PARAM_STR);
+        $stmt->bindValue(":MOT_DE_PASSE", $passwordCrypt, PDO::PARAM_STR);
+        $stmt->bindValue(":ROLE", $role, PDO::PARAM_STR);
         $stmt->execute();
         $estModifier = ($stmt->rowCount() > 0);
         $stmt->closeCursor();
         return $estModifier;
     }
+    
+    
     
     public function verifMailDisponible($mail) {
         $req = "SELECT COUNT(*) as nb FROM client WHERE MAIL = :mail";
