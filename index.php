@@ -96,6 +96,8 @@ try {
             }
         }
         break;
+        case "conditions" : $visiteurController->conditions();
+        break;
         case "administration" : 
             if(!Securite::estConnecte()){
                 Toolbox::ajouterMessageAlerte("Veuillez vous connecter !",Toolbox::COULEUR_ROUGE);

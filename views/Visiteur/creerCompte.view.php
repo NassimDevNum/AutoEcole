@@ -67,7 +67,7 @@
                   <div class="form-check d-flex justify-content-center mb-5 form-check-custom">
     <input class="form-check-input me-2" type="checkbox" value="" id="terms" name="terms" required>
     <label class="form-check-label" for="terms">
-      J'accepte toutes les déclarations dans les <a href="#!">Conditions d'utilisation</a>
+      J'accepte toutes les déclarations dans les <a href="<?= URL; ?>conditions">Conditions d'utilisation</a>
     </label>
 </div>
 
@@ -77,7 +77,7 @@
                 </form>
               </div>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                <img src="https://pin.it/7BHY9Aw" class="img-fluid" alt="Sample image">
+                <img src="<?= URL ?>public/Assets/images/registerImage.jpg" class="img-fluid" alt="Sample image">
               </div>
             </div>
           </div>

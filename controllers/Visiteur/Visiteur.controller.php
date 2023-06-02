@@ -40,6 +40,16 @@ class VisiteurController extends MainController{
         $this->genererPage($data_page);
     }
 
+    public function conditions(){
+        $data_page = [
+            "page_description" => "Les conditions d'utilisation",
+            "page_title" => "Conditions d'utilisation",    // info trans vers la vu grace à cette ligne 
+            "view" => "views/Visiteur/conditions.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->genererPage($data_page);
+    }
+
     public function pageErreur($msg){
         parent::pageErreur($msg);
     }
