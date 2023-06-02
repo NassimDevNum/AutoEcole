@@ -34,21 +34,8 @@
       background-position: center;
   }
   
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 8%;
-    padding-bottom: 10px;
-    height: 70px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  }
+
+
   header .logo {
       color: #5075de;
       font-size: 25px;
@@ -570,13 +557,21 @@
 body{color: #000;overflow-x: hidden;height: 100%;background-image: url('<?= URL; ?>public/Assets/images/background.jpeg')  no-repeat center center;background-repeat: no-repeat;background-size: 100% 100%}.card{padding: 30px 40px;margin-top: 60px;margin-bottom: 60px;border: none !important;box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2)}.blue-text{color: #00BCD4}.form-control-label{margin-bottom: 0}input, textarea, button{padding: 8px 15px;border-radius: 5px !important;margin: 5px 0px;box-sizing: border-box;border: 1px solid #ccc;font-size: 18px !important;font-weight: 300}input:focus, textarea:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;border: 1px solid #00BCD4;outline-width: 0;font-weight: 400}.btn-block{text-transform: uppercase;font-size: 15px !important;font-weight: 400;height: 43px;cursor: pointer}.btn-block:hover{color: #fff !important}button:focus{-moz-box-shadow: none !important;-webkit-box-shadow: none !important;box-shadow: none !important;outline-width: 0}
 
 
-footer {
-    margin-top: 50px;
-    padding-top: 20px; 
-    clear: both;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
   
-  .form-check-custom {
-    align-items: center;
+  .content {
+    flex: 1 0 auto;
+  }
+  
+  footer {
+    flex-shrink: 0;
+  }
+  
+  body {
+    padding-top: 70px; /* Ajustez cette valeur en fonction de la hauteur de votre barre de navigation */
   }
   

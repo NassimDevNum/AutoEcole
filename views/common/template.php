@@ -13,6 +13,7 @@
             <link href="<?= URL ?>public/CSS/<?= $fichier_css ?>" rel="stylesheet" />
         <?php endforeach; ?>
     <?php endif; ?>
+    
 </head>
 <body>
     <?php require_once("views/common/header.php"); ?>
