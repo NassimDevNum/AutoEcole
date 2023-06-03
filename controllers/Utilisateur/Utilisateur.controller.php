@@ -10,25 +10,26 @@ class UtilisateurController extends MainController{
     $this->utilisateurManager = new UtilisateurManager();
     }
 
-  public function validation_login($NOM_CLIENT,$MDP){
-    if($this->utilisateurManager->isCombinaisonValide($NOM_CLIENT,$MDP)){
-      //if($this->utilisateurManager->estCompteActive($login)){
-      Toolbox::ajouterMessageAlerte("Bienvenue sur le site".$NOM_CLIENT." !", Toolbox::COULEUR_VERTE);  
-     // echo "C'est bon";
-      $_SESSION['profil'] = [
-        "NOM_CLIENT" => $NOM_CLIENT,
-      ];
-      header("Location: ".URL."compte/profil");
-    }else {
-        Toolbox::ajouterMessageAlerte("Combinaison login et mdp non valide", Toolbox::COULEUR_ROUGE);
-        header("Location: ".URL."login");
-    }
-  }  
+    public function validation_login($MAIL, $MOT_DE_PASSE){
+      if($this->utilisateurManager->isCombinaisonValide($MAIL, $MOT_DE_PASSE)){
+          // Vérifiez si le compte est actif ici si nécessaire
+          Toolbox::ajouterMessageAlerte("Bienvenue sur le site ".$MAIL." !", Toolbox::COULEUR_VERTE);
+          $_SESSION['profil'] = [
+              "MAIL" => $MAIL,
+          ];
+          header("Location: ".URL."compte/profil");
+      }else {
+          Toolbox::ajouterMessageAlerte("Combinaison email et mot de passe non valide", Toolbox::COULEUR_ROUGE);
+          header("Location: ".URL."login");
+      }
+  }
+   
   //}
   public function profil (){
-    $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['NOM_CLIENT']);
-    $_SESSION['profil']['ROLE'] = $datas['ROLE'];
-
+    $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
+    if (is_array($datas) && isset($datas['ROLE'])) {
+        $_SESSION['profil']['ROLE'] = $datas['ROLE'];
+}
     $data_page = [
       "page_description" => "Page de profil",
       "page_title" => "Page de profil",

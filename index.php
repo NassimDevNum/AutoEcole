@@ -31,16 +31,17 @@ try {
         case "login" : $visiteurController->login();
         break;
         case "validation_login" : 
-            if (!empty($_POST['NOM_CLIENT']) && !empty($_POST['MDP'])){
-                $NOM_CLIENT = Securite::secureHTML($_POST['NOM_CLIENT']);
-                $MDP = Securite::secureHTML($_POST['MDP']);
-                $utilisateurController->validation_login($NOM_CLIENT,$MDP);
-        }
-        else {
-            Toolbox::ajouterMessageAlerte("Login ou mdp non renseigné",Toolbox::COULEUR_ROUGE );
-            header('Location: '.URL.'login');
-        }
-        break;
+            if (!empty($_POST['MAIL']) && !empty($_POST['MOT_DE_PASSE'])){
+                $MAIL = Securite::secureHTML($_POST['MAIL']);
+                $MOT_DE_PASSE = Securite::secureHTML($_POST['MOT_DE_PASSE']);
+                $utilisateurController->validation_login($MAIL,$MOT_DE_PASSE);
+            }
+            else {
+                Toolbox::ajouterMessageAlerte("Email ou mot de passe non renseigné",Toolbox::COULEUR_ROUGE );
+                header('Location: '.URL.'login');
+            }
+            break;
+        
         case "creerCompte" : $visiteurController->creerCompte();
         break;
         case "validation_creerCompte":
