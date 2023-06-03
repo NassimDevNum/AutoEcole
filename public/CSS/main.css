@@ -575,3 +575,8 @@ body {
     padding-top: 70px; /* Ajustez cette valeur en fonction de la hauteur de votre barre de navigation */
   }
   
+  .btn-transparent {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+}

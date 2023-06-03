@@ -22,10 +22,10 @@ class UtilisateurManager extends MainManager{
     
 
 
-    public function getUserInformation($NOM_CLIENT){
-        $req = "SELECT * FROM client WHERE NOM_CLIENT = :NOM_CLIENT";
+    public function getUserInformation($MAIL){
+        $req = "SELECT * FROM client WHERE MAIL = :MAIL";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(":NOM_CLIENT",$NOM_CLIENT,PDO::PARAM_STR);
+        $stmt->bindValue(":MAIL",$MAIL,PDO::PARAM_STR);
         $stmt->execute(); 
         $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
