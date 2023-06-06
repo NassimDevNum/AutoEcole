@@ -122,28 +122,26 @@ echo json_encode($events);
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
-            <div class="card-body text-center">
-                <img src="<?= URL ?>public\Assets\images\avatar.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                <h5 class="my-3"><?= strtoupper($utilisateur['NOM_CLIENT']).' '.$utilisateur['PRENOM_CLIENT']?></h5>
-                <div class="d-flex justify-content-center mb-2">
-                    <!-- <a href="<?= URL; ?>compte/modificationPassword" class="btn btn-warning">Changer le mdp</a> -->
-                    <button id="btnSupCompte" class="btn btn-danger">Supprimer mon compte</button>
-                </div>
-                <div id="suppressionCompte" class="d-none m-2">
-                    <div class="alert alert-danger">
-                        Veuillez confirmer la suppression du compte. 
-                        <br/>
-                        <a href="<?= URL ?>compte/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement</a>
-                    </div>
-                </div>
+          <div class="card-body text-center">
+            <img src="<?= URL ?>public\Assets\images\avatar.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3"><?= strtoupper($utilisateur['NOM_CLIENT']).' '.$utilisateur['PRENOM_CLIENT']?></h5>
+            <div class="d-flex justify-content-center mb-2">
+              <button id="btnSupCompte" class="btn btn-danger">Supprimer mon compte</button>
             </div>
+            <div id="suppressionCompte" class="d-none m-2">
+              <div class="alert alert-danger">
+                Veuillez confirmer la suppression du compte. 
+                <br/>
+                <a href="<?= URL ?>compte/suppressionCompte" class="btn btn-danger">Je souhaite supprimer mon compte définitivement</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-        
       <div class="col-lg-8">
-      <div class="col-lg-8">
-  <div class="card mb-4">
-    <div class="card-body">
+        <div class="card mb-4">
+          <div class="card-body">
       <div class="row">
         <div class="col-sm-3">
           <p class="mb-0">Nom Complet</p>
