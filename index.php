@@ -68,6 +68,9 @@ try {
             header('Location: '.URL.'login');
         } else{
             switch($url[1]){
+
+                case "prendreRdv": $utilisateurController->prendreRdv();                 
+                break;
                 case "profil": $utilisateurController->profil();
                 break;
                 case "deconnexion" : $utilisateurController->deconnexion();

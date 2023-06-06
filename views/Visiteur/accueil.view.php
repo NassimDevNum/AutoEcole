@@ -20,11 +20,16 @@
             <div class="col-lg-6">
                 <h1 class="home-title">Maîtrisez la route</h1>
                 <p class="home-description">Bienvenue à Drive Master ! Nous offrons des formations de conduite de qualité, adaptées à tous les niveaux. Apprenez en toute confiance avec nos instructeurs expérimentés et commencez votre aventure sur la route dès aujourd'hui !</p>
-                <a href="<?= URL; ?>creerCompte" class="btn btn-primary btn-custom">Je m'inscris</a>
+                <?php if(Securite::estConnecte()) : ?>
+                    <a href="<?= URL; ?>prendreRDV" class="btn btn-primary btn-custom">Prendre RDV</a>
+                <?php else : ?>
+                    <a href="<?= URL; ?>creerCompte" class="btn btn-primary btn-custom">Je m'inscris</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
+
 
 
 

@@ -16,6 +16,9 @@
           <a class="nav-link" aria-current="page" href="<?= URL; ?>creerCompte">Créer compte</a>
         </li>
         <?php else : ?>
+          <li class="nav-item">           
+            <a class="nav-link" aria-current="page" href="<?= URL; ?>compte/prendreRdv">Rendez-Vous</a>        
+           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="<?= URL; ?>compte/profil">Profil</a>
         </li>

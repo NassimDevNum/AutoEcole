@@ -128,10 +128,16 @@ class UtilisateurController extends MainController{
 
 
   public function prendreRdv(){
+
+    $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
+    if (is_array($datas) && isset($datas['ROLE'])) {
+        $_SESSION['profil']['ROLE'] = $datas['ROLE'];
+}
     
     $data_page = [
       "page_description" => "Page de prise de RDV",
       "page_title" => "Page de prise de RDV",
+      "utilisateur" => $datas,
       "view" => "views/Utilisateur/prendreRdv.view.php",
       "template" => "views/common/template.php"
   ];

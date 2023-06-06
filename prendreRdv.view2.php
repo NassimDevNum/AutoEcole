@@ -1,5 +1,8 @@
 <h1>Prise de RDV - <?= strtoupper($utilisateur['NOM_CLIENT']).' '.$utilisateur['PRENOM_CLIENT']?> </h1>
 
+<!-- <?php
+$bdd = new PDO('mysql:host=localhost;dbname=autoecole', 'root', '');
+?> -->
 
 
 <form method="POST" action="<?= URL ?>compte/prendreRdv">
@@ -80,3 +83,26 @@
 
     <button type="submit" class="btn btn-primary" >Valider</button>
 </form>
+<!-- <?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // récupération des données du formulaire
+    $N_LECON = $_POST['N_LECON'];
+    $N_CLIENT = $_POST['N_CLIENT'];
+    $N_MONITEUR = $_POST['N_MONITEUR'];
+    $CODE_MODELE = $_POST['CODE_MODELE'];
+    $DATE_HEURE_DEBUT = $_POST['DATE_HEURE_DEBUT'];
+    $DATE_HEURE_FIN = $_POST['DATE_HEURE_FIN'];
+
+    // insérer les données dans la base de données
+    $stmt = $bdd->prepare("INSERT INTO planning (N_LECON, N_CLIENT, N_MONITEUR, CODE_MODELE, DATE_HEURE_DEBUT, DATE_HEURE_FIN) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$N_LECON, $N_CLIENT, $N_MONITEUR, $CODE_MODELE, $DATE_HEURE_DEBUT, $DATE_HEURE_FIN]);
+
+    // afficher un message de succès
+    echo "Données insérées avec succès dans la table planning";
+}
+
+?>
+
+
+?> -->
