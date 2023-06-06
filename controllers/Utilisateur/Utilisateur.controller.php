@@ -131,25 +131,6 @@ class UtilisateurController extends MainController{
     }
   }
 
-
-  // public function prendreRdv(){
-
-  //   $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
-   
-  //   $moniteurs = $this->moniteurManager->getMoniteur();
-
-    
-  //   $data_page = [
-  //     "page_description" => "Page de prise de RDV",
-  //     "page_title" => "Page de prise de RDV",
-  //     "utilisateur" => $datas,
-  //     "moniteurs" => $moniteurs,
-  //     "view" => "views/Utilisateur/prendreRdv.view.php",
-  //     "template" => "views/common/template.php"
-  // ];
-  // $this->genererPage($data_page);
-  // }
-  
   public function prendreRdv()
   {
       $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
@@ -158,16 +139,16 @@ class UtilisateurController extends MainController{
       }
   
       $moniteurs = $this->utilisateurManager->getMoniteur(); // Récupération des informations des moniteurs
-      $lecon = $this->utilisateurManager->getLecon();
-      $modele = $this->utilisateurManager->getModele();
+      $lecons = $this->utilisateurManager->getLecon();
+      $modeles = $this->utilisateurManager->getModele();
 
       $data_page = [
           "page_description" => "Page de prise de RDV",
           "page_title" => "Page de prise de RDV",
           "utilisateur" => $datas,
           "moniteurs" => $moniteurs, // Ajout des moniteurs dans le tableau
-          "lecon" => $lecon,
-          "modele" => $modele,
+          "lecons" => $lecons,
+          "modeles" => $modeles,
           "view" => "views/Utilisateur/prendreRdv.view.php",
           "template" => "views/common/template.php"
       ];
