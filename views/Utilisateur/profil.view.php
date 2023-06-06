@@ -254,4 +254,3 @@ echo json_encode($events);
   </div>
 </section>
 
-.
