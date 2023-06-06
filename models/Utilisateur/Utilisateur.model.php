@@ -120,5 +120,66 @@ class UtilisateurManager extends MainManager{
         return $estModifier;
     }
 
+
+// /* pour les rdv*/ 
+
+    public function getLecon(){
+        $req = $this->getBdd()->prepare("SELECT * FROM lecon");
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+        } 
+    
+
+
+    public function getMoniteur(){
+        $req = $this->getBdd()->prepare("SELECT * FROM moniteur");
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+        } 
+
+    public function getModele(){
+        $req = $this->getBdd()->prepare("SELECT * FROM modele");
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+            } 
+    
+
+
     } 
+    //add ici
+// class MoniteurManager extends MainManager{
+//     public function getMoniteur(){
+//         $req = $this->getBdd()->prepare("SELECT * FROM moniteur");
+//         $req->execute();
+//         $moniteurs = $req->fetchAll(PDO::FETCH_ASSOC);
+//         $req->closeCursor();
+//         return $moniteurs;
+//         } 
+//     }
+
+
+//     class LeconManager extends MainManager{
+//         public function getMoniteur(){
+//             $req = $this->getBdd()->prepare("SELECT * FROM Lecon");
+//             $req->execute();
+//             $moniteurs = $req->fetchAll(PDO::FETCH_ASSOC);
+//             $req->closeCursor();
+//             return $moniteurs;
+//             } 
+//         }
+//         class ModeleManager extends MainManager{
+//             public function getMoniteur(){
+//                 $req = $this->getBdd()->prepare("SELECT * FROM Modele");
+//                 $req->execute();
+//                 $moniteurs = $req->fetchAll(PDO::FETCH_ASSOC);
+//                 $req->closeCursor();
+//                 return $moniteurs;
+//                 } 
+//             }
 ?>

@@ -5,9 +5,14 @@ require_once("./models/Utilisateur/Utilisateur.model.php");
 
 class UtilisateurController extends MainController{
      private $utilisateurManager;
+     private $moniteurManager;
+     private $leconManager;
+     private $modeleManager;
+     
 
     public function __construct(){
     $this->utilisateurManager = new UtilisateurManager();
+   // $this->moniteurManager = new MoniteurManager(); //add ici
     }
 
     public function validation_login($MAIL, $MOT_DE_PASSE){
@@ -127,24 +132,48 @@ class UtilisateurController extends MainController{
   }
 
 
-  public function prendreRdv(){
+  // public function prendreRdv(){
 
-    $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
-    if (is_array($datas) && isset($datas['ROLE'])) {
-        $_SESSION['profil']['ROLE'] = $datas['ROLE'];
-}
+  //   $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
+   
+  //   $moniteurs = $this->moniteurManager->getMoniteur();
+
     
-    $data_page = [
-      "page_description" => "Page de prise de RDV",
-      "page_title" => "Page de prise de RDV",
-      "utilisateur" => $datas,
-      "view" => "views/Utilisateur/prendreRdv.view.php",
-      "template" => "views/common/template.php"
-  ];
-  $this->genererPage($data_page);
+  //   $data_page = [
+  //     "page_description" => "Page de prise de RDV",
+  //     "page_title" => "Page de prise de RDV",
+  //     "utilisateur" => $datas,
+  //     "moniteurs" => $moniteurs,
+  //     "view" => "views/Utilisateur/prendreRdv.view.php",
+  //     "template" => "views/common/template.php"
+  // ];
+  // $this->genererPage($data_page);
+  // }
+  
+  public function prendreRdv()
+  {
+      $datas = $this->utilisateurManager->getUserInformation($_SESSION['profil']['MAIL']);
+      if (is_array($datas) && isset($datas['ROLE'])) {
+          $_SESSION['profil']['ROLE'] = $datas['ROLE'];
+      }
+  
+      $moniteurs = $this->utilisateurManager->getMoniteur(); // Récupération des informations des moniteurs
+      $lecon = $this->utilisateurManager->getLecon();
+      $modele = $this->utilisateurManager->getModele();
+
+      $data_page = [
+          "page_description" => "Page de prise de RDV",
+          "page_title" => "Page de prise de RDV",
+          "utilisateur" => $datas,
+          "moniteurs" => $moniteurs, // Ajout des moniteurs dans le tableau
+          "lecon" => $lecon,
+          "modele" => $modele,
+          "view" => "views/Utilisateur/prendreRdv.view.php",
+          "template" => "views/common/template.php"
+      ];
+      $this->genererPage($data_page);
   }
   
-
   public function pageErreur($msg){
      parent::pageErreur($msg);
   }
