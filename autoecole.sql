@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 14, 2023 at 09:16 AM
--- Server version: 5.7.36
--- PHP Version: 7.4.26
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 06 juin 2023 à 14:34
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,18 +18,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `autoecole`
+-- Base de données : `autoecole`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Structure de la table `client`
 --
 
-DROP TABLE IF EXISTS `client`;
-CREATE TABLE IF NOT EXISTS `client` (
-  `N_CLIENT` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `client` (
+  `N_CLIENT` int(11) NOT NULL,
   `NOM_CLIENT` char(30) DEFAULT NULL,
   `PRENOM_CLIENT` char(30) DEFAULT NULL,
   `MAIL` varchar(100) DEFAULT NULL,
@@ -37,46 +36,49 @@ CREATE TABLE IF NOT EXISTS `client` (
   `DATE_DE_NAISSANCE` date DEFAULT NULL,
   `TEL` int(11) DEFAULT NULL,
   `DATE_INSCRIPTION` date DEFAULT NULL,
-  `MDP` char(100) DEFAULT NULL,
-  `MODE_FACTURATION` char(30) DEFAULT NULL,
-  PRIMARY KEY (`N_CLIENT`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  `MOT_DE_PASSE` char(100) DEFAULT NULL,
+  `ROLE` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `client`
+-- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`N_CLIENT`, `NOM_CLIENT`, `PRENOM_CLIENT`, `MAIL`, `ADRESSE_CLIENT`, `DATE_DE_NAISSANCE`, `TEL`, `DATE_INSCRIPTION`, `MDP`, `MODE_FACTURATION`) VALUES
-(1, 'test', 'test', '', 'test', '2023-02-01', 707070707, '2023-02-01', '$2a$12$N8yVQixf4F71DANJ6XDjZOsCYzWI9a74OSEc.u6HxP4dRpLZdOfvG', 'test'),
+INSERT INTO `client` (`N_CLIENT`, `NOM_CLIENT`, `PRENOM_CLIENT`, `MAIL`, `ADRESSE_CLIENT`, `DATE_DE_NAISSANCE`, `TEL`, `DATE_INSCRIPTION`, `MOT_DE_PASSE`, `ROLE`) VALUES
+(1, 'test', 'test', '', 'test', '2023-02-01', 707070707, '2023-02-01', '$2a$12$N8yVQixf4F71DANJ6XDjZOsCYzWI9a74OSEc.u6HxP4dRpLZdOfvG', NULL),
 (2, 'test2', 'test2', '', 'test2', '2023-02-02', 606060606, '2023-02-02', 'test2', NULL),
-(4, 'test3', 'test3', '', 'test3', '2023-02-03', 808080808, '2023-02-03', '$2y$10$vlBUk76/.BdFMiexivHR0OE3WL9/3IKj1H2TJXW/qj0pbH9Mqhuou', 'test3'),
+(4, 'test3', 'test3', '', 'test3', '2023-02-03', 808080808, '2023-02-03', '$2y$10$vlBUk76/.BdFMiexivHR0OE3WL9/3IKj1H2TJXW/qj0pbH9Mqhuou', 'utilisateur'),
 (6, 'toto', NULL, 'toto@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$x8tyM5HOWiu36we7cl36g.FWlURaSCy4HRVE6KpahODlrpPVEq8ya', NULL),
 (7, 'titi', NULL, 'titi@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$K7MKrQxfh9ZlwWf9EF4M1eUI1y9FPijESr6.UCaNXPMQo2HEZvRaS', NULL),
 (8, 'titi2', NULL, 'titi2@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$RxTi20tWQtdLLNiAzF3yWex7pIlaf5VTxmrX7awbGXG/uvVEdyfYu', NULL),
-(9, 'azer', NULL, 'greyfullbuster111@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$6cf8j5.xbtIhOCRjFwbSA.ToP5Uidi0uh/8TRgK4tIFq7Sm7EyaWK', NULL);
+(9, 'azer', NULL, 'greyfullbuster111@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$6cf8j5.xbtIhOCRjFwbSA.ToP5Uidi0uh/8TRgK4tIFq7Sm7EyaWK', 'utilisateur'),
+(11, 'ltest1', NULL, 'lt@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$xYkmMcJ70GYLsVbbN3qBE.SE5EZQCg45MbppdOKnF5pnb0wpTkWyy', 'administrateur'),
+(12, 'ltest2', NULL, 'ltest2@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$SPciprFwIvlS80sVmOfCvut0EUG4MOVSkOIckCt7sYlbmoMs9hCLK', 'administrateur'),
+(13, 'xxxt', NULL, 'xxxt@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$.QaMv.p9dGownAVcNJiN0e7QelPrKRueHe11c4NIJQRrX7Sypdox.', 'administrateur'),
+(14, 'boubaker', NULL, 'boubaker@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$w80UD3z.ixNIwtsZPnvKsecrqOOabZuR2kvb4/J7.mEpE/It8SoiK', 'utilisateur'),
+(15, 'Joueid', 'Boubaker', 'boubakeeer@gmail.com', '88 avenue de paris', '2023-06-16', 766515539, '2023-06-02', '$2y$10$SdF1ZGSZI/RcmAQSo0OWpuE1ehdWPWSSpcGG12V0rBQwTgL/8SaMS', 'utilisateur'),
+(16, 'Joueid', 'Boubaker', 'boubakerdd@gmail.fr', '88 avenue de paris', '2023-06-11', 766515539, '2023-06-02', '$2y$10$/35.MJj8ChSoOnGOgaRggOkFfrUjtDBW96l9DNhAlxoQaP2aARSRG', 'utilisateur'),
+(17, 'Joueid', 'Boubaker', 'bouba@gmail.com', '88 avenue de tokyo', '2023-06-10', 766515000, '2023-06-02', '$2y$10$KCNUPdTR42a06cfIwhPXoOlz4gXJbMAexLpBEJTajHUxB3a67uqn.', 'utilisateur');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etablissement`
+-- Structure de la table `etablissement`
 --
 
-DROP TABLE IF EXISTS `etablissement`;
-CREATE TABLE IF NOT EXISTS `etablissement` (
+CREATE TABLE `etablissement` (
   `DEGRE` char(30) NOT NULL,
   `NOM` char(50) DEFAULT NULL,
-  `ADRESSE` char(50) DEFAULT NULL,
-  PRIMARY KEY (`DEGRE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ADRESSE` char(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiant`
+-- Structure de la table `etudiant`
 --
 
-DROP TABLE IF EXISTS `etudiant`;
-CREATE TABLE IF NOT EXISTS `etudiant` (
+CREATE TABLE `etudiant` (
   `N_CLIENT` int(11) NOT NULL,
   `DEGRE` char(30) NOT NULL,
   `NIVEAU_ETUDE` char(20) DEFAULT NULL,
@@ -87,131 +89,108 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `DATE_DE_NAISSANCE` date DEFAULT NULL,
   `TEL` int(11) DEFAULT NULL,
   `DATE_INSCRIPTION` date DEFAULT NULL,
-  `MODE_FACTURATION` char(30) DEFAULT NULL,
-  PRIMARY KEY (`N_CLIENT`),
-  KEY `I_FK_ETUDIANT_ETABLISSEMENT` (`DEGRE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `MODE_FACTURATION` char(30) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam`
+-- Structure de la table `lecon`
 --
 
-DROP TABLE IF EXISTS `exam`;
-CREATE TABLE IF NOT EXISTS `exam` (
-  `ID_EXAM` int(11) NOT NULL,
-  `CODE_TYPE` int(11) NOT NULL,
-  PRIMARY KEY (`ID_EXAM`),
-  KEY `I_FK_EXAM_TYPE_EXAM` (`CODE_TYPE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE `lecon` (
+  `N_LECON` int(11) NOT NULL,
+  `NOM_LECON` char(50) DEFAULT NULL,
+  `TARIF` int(20) DEFAULT NULL,
+  `TYPE_BOITE` varchar(30) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `lecon`
+--
+
+INSERT INTO `lecon` (`N_LECON`, `NOM_LECON`, `TARIF`, `TYPE_BOITE`) VALUES
+(0, 'PERMIS_B', 500, 'MANUELLE'),
+(1, 'PERMIS_A', 799, 'AUTOMATIQUE'),
+(11, 'PERMIS_A2', 50, 'MANUELLE'),
+(5, 'PERMIS_B2', 70, 'MANUELLE');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam_code`
+-- Structure de la table `modele`
 --
 
-DROP TABLE IF EXISTS `exam_code`;
-CREATE TABLE IF NOT EXISTS `exam_code` (
-  `ID_EXAM` int(11) NOT NULL,
-  `N_CLIENT` int(11) NOT NULL,
-  `DATE_C` date DEFAULT NULL,
-  `HEURE_C` time DEFAULT NULL,
-  `RESULTAT_C` char(15) DEFAULT NULL,
-  PRIMARY KEY (`ID_EXAM`,`N_CLIENT`),
-  KEY `I_FK_EXAM_CODE_EXAM` (`ID_EXAM`),
-  KEY `I_FK_EXAM_CODE_CLIENT` (`N_CLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `exam_permis`
---
-
-DROP TABLE IF EXISTS `exam_permis`;
-CREATE TABLE IF NOT EXISTS `exam_permis` (
-  `N_CLIENT` int(11) NOT NULL,
-  `ID_EXAM` int(11) NOT NULL,
-  `DATE_P` date DEFAULT NULL,
-  `HEURE_P` time DEFAULT NULL,
-  `RESULTAT_P` char(15) DEFAULT NULL,
-  PRIMARY KEY (`N_CLIENT`,`ID_EXAM`),
-  KEY `I_FK_EXAM_PERMIS_CLIENT` (`N_CLIENT`),
-  KEY `I_FK_EXAM_PERMIS_EXAM` (`ID_EXAM`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `modele`
---
-
-DROP TABLE IF EXISTS `modele`;
-CREATE TABLE IF NOT EXISTS `modele` (
+CREATE TABLE `modele` (
   `CODE_MODELE` int(11) NOT NULL,
   `NOM_MODELE` char(50) DEFAULT NULL,
   `ANNEE_MODELE` date DEFAULT NULL,
-  `TYPE_DE_CONSO` char(32) DEFAULT NULL,
-  PRIMARY KEY (`CODE_MODELE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `TYPE_DE_CONSO` char(32) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `modele`
+--
+
+INSERT INTO `modele` (`CODE_MODELE`, `NOM_MODELE`, `ANNEE_MODELE`, `TYPE_DE_CONSO`) VALUES
+(0, 'RENAULT', '1993-04-13', 'DIESEL'),
+(1, 'PEUJEOT', '1995-04-12', 'ESSENCE'),
+(2, 'TESLA', '2007-04-11', 'ELEC');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lecon`
+-- Structure de la table `moniteur`
 --
 
-DROP TABLE IF EXISTS `lecon`;
-CREATE TABLE IF NOT EXISTS `lecon` (
-  `N_LECON` int(11) NOT NULL,
-  `NOM_MODELE` char(50) DEFAULT NULL,
-  PRIMARY KEY (`N_LECON`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `moniteur`
---
-
-DROP TABLE IF EXISTS `moniteur`;
-CREATE TABLE IF NOT EXISTS `moniteur` (
+CREATE TABLE `moniteur` (
   `N_MONITEUR` int(11) NOT NULL,
   `NOM_MONTEUR` char(30) DEFAULT NULL,
   `DATE_EMBAUCHE` date DEFAULT NULL,
-  PRIMARY KEY (`N_MONITEUR`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `PRENOM` varchar(30) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `moniteur`
+--
+
+INSERT INTO `moniteur` (`N_MONITEUR`, `NOM_MONTEUR`, `DATE_EMBAUCHE`, `PRENOM`) VALUES
+(0, 'DUBOIS', '2021-07-23', 'Sophie'),
+(1, 'LAURENT', '2019-04-12', 'Martin'),
+(2, 'BENAIT', '2019-04-12', 'Abdel'),
+(3, 'ANDERSON', '2015-06-12', 'Elliot');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `planning`
+-- Structure de la table `planning`
 --
 
-DROP TABLE IF EXISTS `planning`;
-CREATE TABLE IF NOT EXISTS `planning` (
+CREATE TABLE `planning` (
   `N_LECON` int(11) NOT NULL,
   `N_CLIENT` int(11) NOT NULL,
   `N_MONITEUR` int(11) NOT NULL,
   `CODE_MODELE` int(11) NOT NULL,
   `DATE_HEURE_DEBUT` datetime DEFAULT NULL,
-  `DATE_HEURE_FIN` datetime DEFAULT NULL,
-  PRIMARY KEY (`N_LECON`,`N_CLIENT`,`N_MONITEUR`,`CODE_MODELE`),
-  KEY `I_FK_PLANNING_CLIENT` (`N_CLIENT`),
-  KEY `I_FK_PLANNING_MONITEUR` (`N_MONITEUR`),
-  KEY `I_FK_PLANNING_MODELE` (`CODE_MODELE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `DATE_HEURE_FIN` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `planning`
+--
+
+INSERT INTO `planning` (`N_LECON`, `N_CLIENT`, `N_MONITEUR`, `CODE_MODELE`, `DATE_HEURE_DEBUT`, `DATE_HEURE_FIN`) VALUES
+(0, 1, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, 2, 1, 1, '2023-05-28 06:21:00', '2023-05-28 08:21:00'),
+(11, 6, 1, 0, '2023-05-05 18:30:00', '2023-05-05 19:30:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `salarie`
+-- Structure de la table `salarie`
 --
 
-DROP TABLE IF EXISTS `salarie`;
-CREATE TABLE IF NOT EXISTS `salarie` (
+CREATE TABLE `salarie` (
   `N_CLIENT` int(11) NOT NULL,
   `NOM_ENTREPRISE` char(32) DEFAULT NULL,
   `NOM_CLIENT` char(30) DEFAULT NULL,
@@ -220,53 +199,130 @@ CREATE TABLE IF NOT EXISTS `salarie` (
   `DATE_DE_NAISSANCE` date DEFAULT NULL,
   `TEL` int(11) DEFAULT NULL,
   `DATE_INSCRIPTION` date DEFAULT NULL,
-  `MODE_FACTURATION` char(30) DEFAULT NULL,
-  PRIMARY KEY (`N_CLIENT`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `MODE_FACTURATION` char(30) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type_exam`
+-- Structure de la table `ultiliser`
 --
 
-DROP TABLE IF EXISTS `type_exam`;
-CREATE TABLE IF NOT EXISTS `type_exam` (
-  `CODE_TYPE` int(11) NOT NULL,
-  `LIBELLE_TYPE` char(40) DEFAULT NULL,
-  PRIMARY KEY (`CODE_TYPE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ultiliser`
---
-
-DROP TABLE IF EXISTS `ultiliser`;
-CREATE TABLE IF NOT EXISTS `ultiliser` (
+CREATE TABLE `ultiliser` (
   `N_LECON` int(11) NOT NULL,
-  `N_VEHICULE` int(11) NOT NULL,
-  PRIMARY KEY (`N_LECON`,`N_VEHICULE`),
-  KEY `I_FK_ULTILISER_VEHICULE` (`N_VEHICULE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `N_VEHICULE` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `ultiliser`
+--
+
+INSERT INTO `ultiliser` (`N_LECON`, `N_VEHICULE`) VALUES
+(0, 8),
+(1, 7);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicule`
+-- Structure de la table `vehicule`
 --
 
-DROP TABLE IF EXISTS `vehicule`;
-CREATE TABLE IF NOT EXISTS `vehicule` (
+CREATE TABLE `vehicule` (
   `N_VEHICULE` int(11) NOT NULL,
   `CODE_MODELE` int(11) NOT NULL,
   `N_IMMATRICULATION` char(20) DEFAULT NULL,
   `DATE_ACHAT` date DEFAULT NULL,
-  `NB_KM_INITIAL` int(11) DEFAULT NULL,
-  PRIMARY KEY (`N_VEHICULE`),
-  KEY `I_FK_VEHICULE_MODELE` (`CODE_MODELE`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `NB_KM_INITIAL` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Déchargement des données de la table `vehicule`
+--
+
+INSERT INTO `vehicule` (`N_VEHICULE`, `CODE_MODELE`, `N_IMMATRICULATION`, `DATE_ACHAT`, `NB_KM_INITIAL`) VALUES
+(7, 1, 'CC3_EM6', '1999-04-13', 150000),
+(5, 1, 'TE3_TES', '2007-04-12', 7825),
+(8, 2, 'CC3_EM8', '2007-04-12', 8825);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`N_CLIENT`);
+
+--
+-- Index pour la table `etablissement`
+--
+ALTER TABLE `etablissement`
+  ADD PRIMARY KEY (`DEGRE`);
+
+--
+-- Index pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD PRIMARY KEY (`N_CLIENT`),
+  ADD KEY `I_FK_ETUDIANT_ETABLISSEMENT` (`DEGRE`);
+
+--
+-- Index pour la table `lecon`
+--
+ALTER TABLE `lecon`
+  ADD PRIMARY KEY (`N_LECON`);
+
+--
+-- Index pour la table `modele`
+--
+ALTER TABLE `modele`
+  ADD PRIMARY KEY (`CODE_MODELE`);
+
+--
+-- Index pour la table `moniteur`
+--
+ALTER TABLE `moniteur`
+  ADD PRIMARY KEY (`N_MONITEUR`);
+
+--
+-- Index pour la table `planning`
+--
+ALTER TABLE `planning`
+  ADD PRIMARY KEY (`N_LECON`,`N_CLIENT`,`N_MONITEUR`,`CODE_MODELE`),
+  ADD KEY `I_FK_PLANNING_CLIENT` (`N_CLIENT`),
+  ADD KEY `I_FK_PLANNING_MONITEUR` (`N_MONITEUR`),
+  ADD KEY `I_FK_PLANNING_MODELE` (`CODE_MODELE`);
+
+--
+-- Index pour la table `salarie`
+--
+ALTER TABLE `salarie`
+  ADD PRIMARY KEY (`N_CLIENT`);
+
+--
+-- Index pour la table `ultiliser`
+--
+ALTER TABLE `ultiliser`
+  ADD PRIMARY KEY (`N_LECON`,`N_VEHICULE`),
+  ADD KEY `I_FK_ULTILISER_VEHICULE` (`N_VEHICULE`);
+
+--
+-- Index pour la table `vehicule`
+--
+ALTER TABLE `vehicule`
+  ADD PRIMARY KEY (`N_VEHICULE`),
+  ADD KEY `I_FK_VEHICULE_MODELE` (`CODE_MODELE`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `N_CLIENT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
