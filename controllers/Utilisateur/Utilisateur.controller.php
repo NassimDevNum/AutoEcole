@@ -155,6 +155,24 @@ class UtilisateurController extends MainController{
       $this->genererPage($data_page);
   }
   
+  public function validation_prendreRdv($n_lecon, $n_moniteur, $n_modele, $date_heure_debut, $date_heure_fin)
+{
+    // Récupération du N_CLIENT à partir de la session
+    $mail_client = $_SESSION['profil']['MAIL'];
+    $infos_client = $this->utilisateurManager->getUserInformation($mail_client);
+    $n_client = $infos_client['N_CLIENT'];
+      
+    if ($this->utilisateurManager->bdPrendreRdv($n_lecon, $n_client, $n_moniteur, $n_modele, $date_heure_debut, $date_heure_fin)) {
+        Toolbox::ajouterMessageAlerte("Le rendez-vous a bien été pris en compte !", Toolbox::COULEUR_VERTE);
+        header("Location: " . URL . "compte/prendreRdv");
+    } else {
+        Toolbox::ajouterMessageAlerte("Erreur lors de la prise de rendez-vous !", Toolbox::COULEUR_ROUGE);
+        header("Location: " . URL . "compte/prendreRdv");
+    }
+}
+
+
+
   public function pageErreur($msg){
      parent::pageErreur($msg);
   }

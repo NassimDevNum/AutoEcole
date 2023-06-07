@@ -149,7 +149,20 @@ class UtilisateurManager extends MainManager{
         return $datas;
             } 
     
-
+            public function bdPrendreRdv($n_lecon, $n_client, $n_moniteur, $date_heure_debut, $date_heure_fin){
+                $req = "INSERT INTO PLANNING (N_LECON, N_CLIENT, N_MONITEUR, DATE_HEURE_DEBUT, DATE_HEURE_FIN) VALUES (:n_lecon, :n_client, :n_moniteur, :date_heure_debut, :date_heure_fin)";
+                $stmt = $this->getBdd()->prepare($req);
+                $stmt->bindValue(":n_lecon", $n_lecon, PDO::PARAM_INT);
+                $stmt->bindValue(":n_client", $n_client, PDO::PARAM_INT);
+                $stmt->bindValue(":n_moniteur", $n_moniteur, PDO::PARAM_INT);
+                $stmt->bindValue(":date_heure_debut", $date_heure_debut, PDO::PARAM_STR);
+                $stmt->bindValue(":date_heure_fin", $date_heure_fin, PDO::PARAM_STR);
+                $stmt->execute();
+                $resultat = ($stmt->rowCount() > 0);
+                $stmt->closeCursor();
+                return $resultat;
+            }
+                
 
     } 
     //add ici

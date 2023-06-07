@@ -9,7 +9,7 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Prendre RDV</p>
 
-                <form class="mx-1 mx-md-4" method="POST" action="<?= URL ?>compte/prendreRdv">
+                <form class="mx-1 mx-md-4" method="POST" action="<?= URL ?>compte/validation_prendreRdv">
 
                   <div class="mb-3">
                     <label for="NOM_LECON" class="form-label">Leçon</label>
@@ -24,7 +24,7 @@
                     <label for="N_MONITEUR" class="form-label">Moniteur</label>
                     <select id="N_MONITEUR" name="N_MONITEUR" class="form-control" required>
                     <?php foreach ($moniteurs as $moniteur): ?>
-                      <option value="<?= $moniteur['NOM_MONTEUR'] ?>"><?= $moniteur['NOM_MONTEUR'] ?></option>
+                      <option value="<?= $moniteur['NOM_MONITEUR'] ?>"><?= $moniteur['NOM_MONITEUR'] ?></option>
                     <?php endforeach; ?>
                     </select>
                   </div>
