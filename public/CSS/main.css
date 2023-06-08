@@ -1,9 +1,6 @@
 .p_invisible{
     display:none;
 }
-.white-text {
-    color: #FFFFFF;
- }
 /* h1 {
     color: aqua;
 } */
@@ -359,69 +356,8 @@
       .service {
           width: 100%;
       }
-      #contact {
-          height: auto;
-      }
-      .localisation_contact_div {
-          height: auto;
-          flex-direction: column;
-          width: 100%;
-      }
-      .localisation{
-          width: 100%;
-          margin-bottom: 30px;
-      }
-      .localisation_contact_div .form_contact {
-          width: 100%;
-          
-      }
-      .menu_toggle {
-          height: 50px;
-          width: 50px;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-      }
-      .menu_toggle span {
-         width: 35px;
-         background-color: #5075de;
-         height: 5px;
-         border-radius: 6px;
-         transition: 0.5s;
-      }
-      .menu_toggle span.active {
-          width: 0px;
-      }
-      .menu_toggle::before {
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 5px;
-          background-color: #5075de;
-          transform:translateY(10px);
-          border-radius: 6px;
-          transition: 0.5s;
-      }
-      .menu_toggle.active::before {
-          width: 28px;
-          transform: rotate(45deg);
-      }
-      .menu_toggle::after {
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 5px;
-          background-color: #5075de;
-          transform:translateY(-10px);
-          border-radius: 6px;
-          transition: 0.5s;
-      }
-      .menu_toggle.active::after {
-          width: 28px;
-          transform: rotate(-45deg);
-      }
+      
+    
       header .menu.responsive {
           position: absolute;
           top: 50px;
