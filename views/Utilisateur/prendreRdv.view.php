@@ -21,8 +21,8 @@
                   </div>
 
                   <div class="mb-3">
-                    <label for="N_MONITEUR" class="form-label">Moniteur</label>
-                    <select id="N_MONITEUR" name="N_MONITEUR" class="form-control" required>
+                    <label for="NOM_MONITEUR" class="form-label">Moniteur</label>
+                    <select id="NOM_MONITEUR" name="NOM_MONITEUR" class="form-control" required>
                     <?php foreach ($moniteurs as $moniteur): ?>
                       <option value="<?= $moniteur['NOM_MONITEUR'] ?>"><?= $moniteur['NOM_MONITEUR'] ?></option>
                     <?php endforeach; ?>

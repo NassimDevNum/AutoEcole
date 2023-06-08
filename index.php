@@ -72,14 +72,14 @@ try {
                 case "prendreRdv": $utilisateurController->prendreRdv();                 
                 break;
                 case "validation_prendreRdv":
-                    if (!empty($_POST['NOM_LECON']) && !empty($_POST['N_MONITEUR']) && !empty($_POST['NOM_MODELE']) && !empty($_POST['DATE_HEURE_DEBUT']) && !empty($_POST['DATE_HEURE_FIN'])) {
-                        $n_lecon = Securite::secureHTML($_POST['NOM_LECON']);
-                        $n_moniteur = Securite::secureHTML($_POST['N_MONITEUR']);
-                        $n_modele = Securite::secureHTML($_POST['NOM_MODELE']);
+                    if (!empty($_POST['NOM_LECON']) && !empty($_POST['NOM_MONITEUR']) && !empty($_POST['NOM_MODELE']) && !empty($_POST['DATE_HEURE_DEBUT']) && !empty($_POST['DATE_HEURE_FIN'])) {
+                        $nom_lecon = Securite::secureHTML($_POST['NOM_LECON']);
+                        $nom_moniteur = Securite::secureHTML($_POST['NOM_MONITEUR']);
+                        $nom_modele = Securite::secureHTML($_POST['NOM_MODELE']);
                         $date_heure_debut = Securite::secureHTML($_POST['DATE_HEURE_DEBUT']);
                         $date_heure_fin = Securite::secureHTML($_POST['DATE_HEURE_FIN']);
                 
-                        $utilisateurController->validation_prendreRdv($n_lecon, $n_moniteur, $n_modele, $date_heure_debut, $date_heure_fin);
+                        $utilisateurController->validation_prendreRdv($nom_lecon, $nom_moniteur, $nom_modele, $date_heure_debut, $date_heure_fin);
                     } else {
                         Toolbox::ajouterMessageAlerte("Tous les champs sont obligatoires !", Toolbox::COULEUR_ROUGE);
                         header('Location: ' . URL . 'compte/prendreRdv');
