@@ -1,7 +1,9 @@
 .p_invisible{
     display:none;
 }
-
+.white-text {
+    color: #FFFFFF;
+ }
 /* h1 {
     color: aqua;
 } */
