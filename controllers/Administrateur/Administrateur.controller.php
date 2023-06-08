@@ -25,7 +25,7 @@ class AdministrateurController extends MainController{
 
     public function validation_modificationRole($NOM_CLIENT,$ROLE){
        if($this->AdministrateurManager->bdModificationRoleUser($NOM_CLIENT,$ROLE)){
-        Toolbox::ajouterMessageAlerte('La modification  été prise en compte', Toolbox::COULEUR_VERTE);
+        Toolbox::ajouterMessageAlerte('La modification été prise en compte', Toolbox::COULEUR_VERTE);
        }
        else{
         Toolbox::ajouterMessageAlerte("La modification n'a été prise en compte", Toolbox::COULEUR_ROUGE);
