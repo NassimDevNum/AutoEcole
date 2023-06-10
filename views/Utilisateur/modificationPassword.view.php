@@ -1,4 +1,4 @@
-<h1>Modification du mot de pass - <?= $_SESSION['profil']['NOM_CLIENT']?></h1>
+<h1>Modification du mot de pass - <?= $_SESSION['profil']['MAIL']?></h1>
 
 <form method="POST" action="<?= URL ?>compte/validation_modificationPassword">
     <div class="mb-3">
