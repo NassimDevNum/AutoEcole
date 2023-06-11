@@ -5,9 +5,7 @@ require_once("./models/Utilisateur/Utilisateur.model.php");
 
 class UtilisateurController extends MainController{
      private $utilisateurManager;
-     private $moniteurManager;
-     private $leconManager;
-     private $modeleManager;
+
      
 
     public function __construct(){
@@ -53,23 +51,34 @@ class UtilisateurController extends MainController{
   }
 
   public function validation_creerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe)
-  {
-      if ($this->utilisateurManager->verifMailDisponible($mail)) {
-          $mot_de_passe_crypte = password_hash($mot_de_passe, PASSWORD_DEFAULT);
-          if ($this->utilisateurManager->bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe_crypte, "utilisateur"  )) {
-              $clef = rand(0, 9999); // À voir après
-              $this->sendMailValidation($nom, $mail, $clef);
-              Toolbox::ajouterMessageAlerte("Le compte a été créé ! Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
-              header("Location: " . URL . "login");
-          } else {
-              Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !", Toolbox::COULEUR_ROUGE);
-              header("Location: " . URL . "creerCompte");
-          }
-      } else {
-          Toolbox::ajouterMessageAlerte("Le mail est déjà utilisé !", Toolbox::COULEUR_ROUGE);
-          header("Location: " . URL . "creerCompte");
-      }
-  }
+{
+    // Vérifier si le mot de passe est valide
+    if (!$this->utilisateurManager->validatePassword($mot_de_passe)) {
+        Toolbox::ajouterMessageAlerte("Le mot de passe ne respecte pas les critères de complexité.", Toolbox::COULEUR_ROUGE);
+        header("Location: " . URL . "creerCompte");
+        return;
+    }
+
+    if ($this->utilisateurManager->verifMailDisponible($mail)) {
+        $mot_de_passe_crypte = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+        if ($this->utilisateurManager->bdCreerCompte($nom, $prenom, $date_naissance, $numero_telephone, $mail, $adresse, $mot_de_passe_crypte, "utilisateur"  )) {
+            $clef = rand(0, 9999); // À voir après
+            $this->sendMailValidation($nom, $mail, $clef);
+            Toolbox::ajouterMessageAlerte("Le compte a été créé ! Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
+            header("Location: " . URL . "login");
+        } else {
+            Toolbox::ajouterMessageAlerte("Erreur lors de la création du compte, recommencez !", Toolbox::COULEUR_ROUGE);
+            header("Location: " . URL . "creerCompte");
+        }
+    } else {
+        Toolbox::ajouterMessageAlerte("Le mail est déjà utilisé !", Toolbox::COULEUR_ROUGE);
+        header("Location: " . URL . "creerCompte");
+    }
+}
+
+
+
+
   
 
 

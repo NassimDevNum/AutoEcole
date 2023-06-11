@@ -163,6 +163,30 @@ class UtilisateurManager extends MainManager{
                 $stmt->closeCursor();
                 return $resultat;
             }
+
+            function validatePassword($mot_de_passe) {
+                // Vérifier la longueur minimale
+                if (strlen($mot_de_passe) < 8) {
+                    return false;
+                }
+              
+                // Vérifier la présence de lettres majuscules et minuscules
+                if (!preg_match('/[A-Z]/', $mot_de_passe) || !preg_match('/[a-z]/', $mot_de_passe)) {
+                    return false;
+                }
+              
+                // Vérifier la présence de chiffres
+                if (!preg_match('/\d/', $mot_de_passe)) {
+                    return false;
+                }
+              
+                // Vérifier la présence de caractères spéciaux
+                if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $mot_de_passe)) {
+                    return false;
+                }
+              
+                return true;
+              }
                 
 
     } 
